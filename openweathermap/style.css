@@ -1,0 +1,46 @@
+.community-regseb-openweathermap {
+    color: white;
+}
+.community-regseb-openweathermap h1 {
+    margin: 0.7em;
+}
+
+.community-regseb-openweathermap ul {
+    margin: 0.7em;
+    padding-left: 0;
+}
+.community-regseb-openweathermap li {
+    overflow: auto;
+}
+.community-regseb-openweathermap li p {
+    float: left;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.community-regseb-openweathermap li strong {
+    display: block;
+    text-transform: capitalize;
+    width: 60px;
+}
+.community-regseb-openweathermap li span {
+    display: block;
+}
+.community-regseb-openweathermap .temp {
+    background-image: url("img/temp.svg");
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    padding-left: 10px;
+}
+.community-regseb-openweathermap .wind::before {
+    background-image: url("img/wind.svg");
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    content: "";
+    height: 200%;
+    left: -50%;
+    position: absolute;
+    top: -50%;
+    transform: rotate(-30deg);
+    width: 200%;
+    z-index: -1;
+}

@@ -1,0 +1,28 @@
+.community-regseb-om {
+    background-image: url("img/icon.svg");
+    background-position: 0.7em center;
+    background-repeat: no-repeat;
+}
+.community-regseb-om p {
+    color: white;
+    display: block;
+    margin-bottom: 0;
+    margin-left: 4.2em;
+    margin-top: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+.community-regseb-om p:first-child {
+    margin-top: 0.7em;
+}
+.community-regseb-om p:last-child {
+    margin-bottom: 0.7em;
+}
+.community-regseb-om p a {
+    color: white;
+}
+.community-regseb-om img {
+    vertical-align: middle;
+}

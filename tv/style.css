@@ -1,0 +1,26 @@
+.community-regseb-tv ul {
+    color: white;
+    list-style-type: none;
+    margin: 0.7em;
+    padding-left: 0;
+}
+.community-regseb-tv li {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.community-regseb-tv li > img,
+.community-regseb-tv span {
+    margin-right: 0.3em;
+}
+.community-regseb-tv .culture        { background-color: #cddc39; }
+.community-regseb-tv .jeunesse       { background-color: #ff9800; }
+.community-regseb-tv .information    { background-color: #607d8b; }
+.community-regseb-tv .sport          { background-color: #4caf50; }
+.community-regseb-tv .film           { background-color: #f44336; }
+.community-regseb-tv .serie          { background-color: #00bcd4; }
+.community-regseb-tv .divertissement { background-color: #aa00ff; }
+.community-regseb-tv .documentaire   { background-color: #9c27b0; }
+.community-regseb-tv .telefilm       { background-color: #f91f63; }
+.community-regseb-tv .divers         { background-color: #000000; }

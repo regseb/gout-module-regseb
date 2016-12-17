@@ -1,0 +1,51 @@
+.community-regseb-googlecalendar {
+    background-image: url("img/icon.svg");
+    background-position: right 0.7em center;
+    background-repeat: no-repeat;
+    background-size: auto calc(100% - 1.4em);
+}
+.community-regseb-googlecalendar p {
+    margin: 0.7em;
+}
+.community-regseb-googlecalendar button {
+    background-color: black;
+    border: medium none;
+    border-radius: 0.2em;
+    box-shadow:
+        0 0.2em 0.2em 0      rgba(0, 0, 0, 0.14),
+        0 0.3em 0.1em -0.2em rgba(0, 0, 0, 0.2),
+        0 0.1em 0.5em 0      rgba(0, 0, 0, 0.12);
+    box-sizing: content-box;
+    color: white;
+    cursor: pointer;
+    font-size: 10px;
+    padding: 0.7em;
+}
+.community-regseb-googlecalendar button:hover {
+    filter: brightness(1.2);
+}
+.community-regseb-googlecalendar p a {
+    color: black;
+    display: none;
+}
+.community-regseb-googlecalendar ul {
+    color: white;
+    list-style-type: none;
+    margin: 0.7em;
+    padding-left: 0;
+}
+.community-regseb-googlecalendar li {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.community-regseb-googlecalendar time {
+    display: inline-block;
+    width: 5.6em;
+}
+.community-regseb-googlecalendar span {
+    display: inline-block;
+    text-align: center;
+    width: 4.9em;
+}
