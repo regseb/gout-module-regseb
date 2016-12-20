@@ -1,4 +1,4 @@
-# Gout-widget-regseb
+# gout-widget-regseb
 
 > Widgets pour Gout.
 
@@ -9,7 +9,11 @@ Ce projet contient des widgets pour l'agrégateur d'Internet
 
 ## Installation
 
-TODO
+Placez vous à la racine du projet Gout et exécutez la commande ci-dessous :
+
+```shell
+git submodule add -f https://github.com/regseb/gout-widget-regseb.git src/widget/community/regseb
+```
 
 ## Licence
 
