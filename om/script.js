@@ -14,13 +14,18 @@ define(["jquery", "scronpt"], function ($, Cron) {
         "unknown":           "Inconnue"
     };
     const CHANNELS = {
-        "bein1":                 "Bein Sport 1",
-        "canalplus":             "Canal+",
-        "canalplus-sport-bein1": "Canal+ Sport / Bein Sport 1",
-        "eurosport_2":           "Eurosport 2",
-        "undisclosed":           "Non communiquée",
-        "unknown":               "Inconnue",
-        "w9":                    "W9"
+        "bein1":                  "Bein Sport 1",
+        "bein2":                  "Bein Sport 2",
+        "canalplus":              "Canal+",
+        "canalplussport":         "Canal+ Sport",
+        "canalplussport_bein1":   "Canal+ Sport / Bein Sport 1",
+        "eurosport2":             "Eurosport 2",
+        "france3":                "France 3",
+        "france3_canalplussport": "France 3 / Canal+ Sport",
+        "omnet":                  "OM.net",
+        "undisclosed":            "Non communiquée",
+        "unknown":                "Inconnue",
+        "w9":                     "W9"
     };
     // dd/MM HH:mm.
     const DTF_SHORT = new Intl.DateTimeFormat("fr-FR", {
@@ -60,10 +65,15 @@ define(["jquery", "scronpt"], function ($, Cron) {
             return "undisclosed";
         }
         switch (/\/([^/]+)\.png$/.exec($img.attr("data-src"))[1]) {
+            case "150727_cplusport":            return "canalplussport";
+            case "150916_bein2_ok_0":           return "bein2";
             case "canalplus-logo-ok-min":       return "canalplus";
-            case "eurosport_2":                 return "eurosport_2";
+            case "eurosport_2":                 return "eurosport2";
+            case "france3_canalplussport":      return "france3_canalplussport";
+            case "france3-logo-ok-min":         return "france3";
+            case "logo-omnet":                  return "omnet";
             case "logo-w9-min":                 return "w9";
-            case "canal-plus-sport-beinsport1": return "canalplus-sport-bein1";
+            case "canal-plus-sport-beinsport1": return "canalplussport_bein1";
             case "beinsport1-transparent":      return "bein1";
             default:                            return "unknown";
         }
@@ -112,10 +122,7 @@ define(["jquery", "scronpt"], function ($, Cron) {
                 };
             }
 
-            return {
-                "last": last,
-                "next": next
-            };
+            return { last, next };
         });
     }; // extract()
 

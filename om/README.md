@@ -15,7 +15,7 @@ propriétés suivantes :
   du cadre (au format hexadécimale, régulier RGB ou avec des mots-clefs
   prédéfinis) ;
 - `"cron`" (optionnel - valeur par défaut : `"0 7 * * *"`) : la notation cron
-  indiquant la fréquence de changement des pages.
+  indiquant la fréquence de mise à jour.
 
 Les dimensions conseillées sont **20x3**.
 
