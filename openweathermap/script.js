@@ -1,10 +1,14 @@
-define(["jquery", "scronpt"], function ($, Cron) {
+(function () {
     "use strict";
+
+    const owner = (document["_currentScript"] || document.currentScript)
+                                                                 .ownerDocument;
+
+    const $    = require("jquery");
+    const Cron = require("scronpt");
 
     const API_URL = "http://api.openweathermap.org/data/2.5/";
     const IMG_DIR = "widget/community/regseb/openweathermap/img/";
-
-    const gates = {};
 
     const extract = function (city, appid, kind) {
         // Si c'est la météo du jour qui est demandée.
@@ -47,117 +51,119 @@ define(["jquery", "scronpt"], function ($, Cron) {
         });
     }; // extract()
 
-    const display = function ($root, data) {
-        const $li = $("<li>");
-        let $p = $("<p>");
+    document.registerElement("community-regseb-openweathermap",
+                             class extends HTMLElement {
 
-        const date = new Date();
-        date.setDate(date.getDate() +  $("li", $root).length);
-        $p.append($("<strong>").text(
-            date.toLocaleString("fr-FR", { "weekday": "long" })));
+        setFiles({ "config.json": config }) {
+            this.cron = new Cron(config.cron || "0 * * * *",
+                                 this.update.bind(this));
+            this.city = config.city;
+            this.appid = config.appid;
 
-        $p.append($("<img>", { "src":    IMG_DIR + data.icon + ".svg",
-                               "alt":    data.desc,
-                               "title":  data.help,
-                               "width":  32,
-                               "height": 32 }));
+            this.style.backgroundColor = config.color || "#03a9f4";
+            $("h1", this).text(config.title || this.city.split(",")[0]);
+        } // setFiles()
 
-        $li.append($p);
+        setScrapers() {
+            // Ne rien faire.
+        } // setScrapers()
 
-        $p = $("<p>");
+        display(data) {
+            const $li = $("<li>");
+            let $p = $("<p>");
 
-        $p.append($("<span>").addClass("temp")
-                             .text(data.temp.min + " / " +
-                                   data.temp.max + " °C"));
+            const date = new Date();
+            date.setDate(date.getDate() +  $("li", this).length);
+            $p.append($("<strong>").text(
+                date.toLocaleString("fr-FR", { "weekday": "long" })));
 
-        let dir = "";
-        if (22.5 > data.wind.deg) {
-            dir = "nord";
-        } else if (67.5  > data.wind.deg) {
-            dir = "nord-est";
-        } else if (112.5 > data.wind.deg) {
-            dir = "est";
-        } else if (157.5 > data.wind.deg) {
-            dir = "sud-est";
-        } else if (202.5 > data.wind.deg) {
-            dir = "sud";
-        } else if (247.5 > data.wind.deg) {
-            dir = "sud-ouest";
-        } else if (292.5 > data.wind.deg) {
-            dir = "ouest";
-        } else if (337.5 > data.wind.deg) {
-            dir = "nord-ouest";
-        } else {
-            dir = "nord";
-        }
-        const $dir = $("<img>").attr({ "src":   IMG_DIR + "wind.svg",
-                                       "alt":   "^",
-                                       "title": dir })
-                               .css("transform",
-                                    "rotate(" + data.wind.deg + "deg)");
+            $p.append($("<img>", { "src":    IMG_DIR + data.icon + ".svg",
+                                   "alt":    data.desc,
+                                   "title":  data.help,
+                                   "width":  32,
+                                   "height": 32 }));
 
-        $p.append($("<span>").addClass("wind")
-                             .append($dir)
-                             .append(data.wind.speed + " km/h"));
+            $li.append($p);
 
-        $li.append($p);
+            $p = $("<p>");
 
-        $("ul", $root).append($li);
-    }; // display()
+            $p.append($("<span>").addClass("temp")
+                                 .text(data.temp.min + " / " +
+                                       data.temp.max + " °C"));
 
-    const update = function (id) {
-        const args = gates[id];
-
-        // Si la page est cachée : ne pas actualiser les données et indiquer
-        // qu'il faudra mettre à jour les données quand l'utilisateur reviendra
-        // sur la page.
-        if (document.hidden) {
-            args.cron.stop();
-            return;
-        }
-        args.cron.start();
-
-        const $root = $("#" + id);
-        $("ul", $root).empty();
-
-        // Récupérer la météo du jour.
-        extract(args.city, args.appid, "weather").then(function (item) {
-            display($root, item);
-        });
-
-        // Récupérer les prévisions.
-        extract(args.city, args.appid, "forecast").then(function (items) {
-            for (let item of items) {
-                display($root, item);
+            let dir = "";
+            if (22.5 > data.wind.deg) {
+                dir = "nord";
+            } else if (67.5  > data.wind.deg) {
+                dir = "nord-est";
+            } else if (112.5 > data.wind.deg) {
+                dir = "est";
+            } else if (157.5 > data.wind.deg) {
+                dir = "sud-est";
+            } else if (202.5 > data.wind.deg) {
+                dir = "sud";
+            } else if (247.5 > data.wind.deg) {
+                dir = "sud-ouest";
+            } else if (292.5 > data.wind.deg) {
+                dir = "ouest";
+            } else if (337.5 > data.wind.deg) {
+                dir = "nord-ouest";
+            } else {
+                dir = "nord";
             }
-        });
-    }; // update()
+            const $dir = $("<img>").attr({ "src":   IMG_DIR + "wind.svg",
+                                           "alt":   "^",
+                                           "title": dir })
+                                   .css("transform",
+                                        "rotate(" + data.wind.deg + "deg)");
 
-    const wake = function () {
-        for (let id in gates) {
-            if (!gates[id].cron.status()) {
-                update(id);
+            $p.append($("<span>").addClass("wind")
+                                 .append($dir)
+                                 .append(data.wind.speed + " km/h"));
+
+            $li.append($p);
+
+            $("ul", this).append($li);
+        } // display()
+
+        update() {
+            // Si la page est cachée : ne pas actualiser les données et indiquer
+            // qu'il faudra mettre à jour les données quand l'utilisateur
+            // reviendra sur la page.
+            if (document.hidden) {
+                this.cron.stop();
+                return;
             }
-        }
-    }; // wake()
+            this.cron.start();
 
-    const create = function (id, { "config.json": config }) {
-        const $root = $("#" + id);
-        $root.css("background-color", config.color || "#03a9f4");
-        $("h1", $root).text(config.city.split(",")[0]);
+            $("ul", this).empty();
 
-        gates[id] = {
-            "city":  config.city,
-            "appid": config.appid,
-            "cron":  new Cron(config.cron || "0 * * * *", update, id)
-        };
+            // Récupérer la météo du jour.
+            extract(this.city, this.appid, "weather").then(
+                                                       this.display.bind(this));
 
-        if (1 === Object.keys(gates).length) {
-            document.addEventListener("visibilitychange", wake);
-        }
+            // Récupérer les prévisions.
+            const that = this;
+            extract(this.city, this.appid, "forecast").then(function (items) {
+                items.forEach(that.display.bind(that));
+            });
+        } // update()
 
-        update(id);
-    }; // create()
+        wake() {
+            if (!this.cron.status()) {
+                this.update();
+            }
+        } // wake()
 
-    return create;
-});
+        createdCallback() {
+            const template = owner.querySelector("template").content;
+            const clone = owner.importNode(template, true);
+            this.appendChild(clone);
+        } // createdCallback()
+
+        attachedCallback() {
+            document.addEventListener("visibilitychange", this.wake.bind(this));
+            this.update();
+        } // attachedCallback()
+    });
+})();

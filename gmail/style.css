@@ -1,13 +1,26 @@
-.community-regseb-gmail {
+community-regseb-gmail {
     background-image: url("img/icon.svg");
     background-position: right 0.7em center;
     background-repeat: no-repeat;
     background-size: auto calc(100% - 1.4em);
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    line-height: 1.4em;
 }
-.community-regseb-gmail p {
+community-regseb-gmail a {
+    color: white;
+    text-decoration: none;
+}
+community-regseb-gmail a:visited {
+    color: black;
+}
+community-regseb-gmail a:hover {
+    text-decoration: underline;
+}
+community-regseb-gmail p {
     margin: 0.7em;
 }
-.community-regseb-gmail button {
+community-regseb-gmail button {
     background-color: black;
     border: medium none;
     border-radius: 0.2em;
@@ -22,20 +35,20 @@
     padding: 0.7em;
     transition: 0.2s ease-out;
 }
-.community-regseb-gmail button:hover {
+community-regseb-gmail button:hover {
     filter: brightness(1.2);
 }
-.community-regseb-gmail p a {
+community-regseb-gmail p a {
     color: black;
     display: none;
 }
-.community-regseb-gmail ul {
+community-regseb-gmail ul {
     display: none;
     list-style-type: none;
     margin: 0.7em;
     padding-left: 0;
 }
-.community-regseb-gmail ul a {
+community-regseb-gmail ul a {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;

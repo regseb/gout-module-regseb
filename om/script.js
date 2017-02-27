@@ -1,5 +1,11 @@
-define(["jquery", "scronpt"], function ($, Cron) {
+(function () {
     "use strict";
+
+    const owner = (document["_currentScript"] || document.currentScript)
+                                                                 .ownerDocument;
+
+    const $    = require("jquery");
+    const Cron = require("scronpt");
 
     const IMG_DIR = "widget/community/regseb/om/img/";
     const TOURNAMENTS = {
@@ -43,8 +49,6 @@ define(["jquery", "scronpt"], function ($, Cron) {
         "hour":    "2-digit",
         "minute":  "2-digit"
     });
-
-    const gates = {};
 
     const reckonTournament = function (id) {
         switch (id) {
@@ -126,81 +130,84 @@ define(["jquery", "scronpt"], function ($, Cron) {
         });
     }; // extract()
 
-    const display = function ($root, data) {
-        // Afficher le dernier match joué.
-        const $last = $("p:first", $root);
-        const last = data.last;
-        let tournament = last.tournament;
-        $("img", $last).attr({ "src":   IMG_DIR + tournament + ".svg",
-                               "alt":   TOURNAMENTS[tournament],
-                               "title": TOURNAMENTS[tournament] });
-        $("a", $last).attr("href",  last.link)
-                     .text(last.host.name + " " + last.host.score + " - " +
-                           last.guest.score + " " + last.guest.name);
+    document.registerElement("community-regseb-om",
+                             class extends HTMLElement {
 
-        // Afficher l'éventuel prochain match.
-        const $next = $("p:last", $root);
-        if (null === data.next) {
-            $("a", $next).attr("href", "https://www.om.net/")
-                         .text("(Aucun match programmé)");
-        } else {
-            const next = data.next;
-            const channel = next.channel;
-            tournament = next.tournament;
-            $("img:first", $next).attr({ "src":   IMG_DIR + tournament + ".svg",
-                                         "alt":   TOURNAMENTS[tournament],
-                                         "title": TOURNAMENTS[tournament] });
-            $("a", $next).attr("href", data.next.link)
-                         .text(next.host + " - " + next.guest);
-            $("time", $next).attr("title", DTF_LONG.format(next.date))
-                            .text(DTF_SHORT.format(next.date));
-            $("img:last", $next).attr({ "src":   IMG_DIR + channel + ".svg",
-                                        "alt":   CHANNELS[channel],
-                                        "title": CHANNELS[channel] });
-        }
-    }; // display()
-
-    const update = function (id) {
-        const args = gates[id];
-
-        // Si la page est cachée : ne pas actualiser les données et indiquer
-        // qu'il faudra mettre à jour les données quand l'utilisateur reviendra
-        // sur la page.
-        if (document.hidden) {
-            args.cron.stop();
-            return;
-        }
-        args.cron.start();
-
-        const $root = $("#" + id);
-        extract().then(function (data) {
-            display($root, data);
-        });
-    }; // update()
-
-    const wake = function () {
-        for (let id in gates) {
-            if (!gates[id].cron.status()) {
-                update(id);
-            }
-        }
-    }; // wake()
-
-    const create = function (id, { "config.json": config }) {
-        const $root = $("#" + id);
-        $root.css("background-color", config.color || "#03a9f4");
-
-        gates[id] = {
+        setFiles({ "config.json": config }) {
             // Par défaut, mettre à jour tous les matins à 7h.
-            "cron": new Cron(config.cron || "0 7 * * *", update, id)
-        };
+            this.cron = new Cron(config.cron || "0 7 * * *",
+                                 this.update.bind(this));
 
-        if (1 === Object.keys(gates).length) {
-            document.addEventListener("visibilitychange", wake);
-        }
+            this.style.backgroundColor = config.color || "#03a9f4";
+        } // setFiles()
 
-        update(id);
-    }; // create()
+        setScrapers() {
+            // Ne rien faire.
+        } // setScrapers()
 
-    return create;
-});
+        display(data) {
+            // Afficher le dernier match joué.
+            const $last = $("p:first", this);
+            const last = data.last;
+            let tournament = last.tournament;
+            $("img", $last).attr({ "src":   IMG_DIR + tournament + ".svg",
+                                   "alt":   TOURNAMENTS[tournament],
+                                   "title": TOURNAMENTS[tournament] });
+            $("a", $last).attr("href",  last.link)
+                         .text(last.host.name + " " + last.host.score + " - " +
+                               last.guest.score + " " + last.guest.name);
+
+            // Afficher l'éventuel prochain match.
+            const $next = $("p:last", this);
+            if (null === data.next) {
+                $("a", $next).attr("href", "https://www.om.net/")
+                             .text("(Aucun match programmé)");
+            } else {
+                const next = data.next;
+                const channel = next.channel;
+                tournament = next.tournament;
+                $("img:first", $next).attr({
+                    "src":   IMG_DIR + tournament + ".svg",
+                    "alt":   TOURNAMENTS[tournament],
+                    "title": TOURNAMENTS[tournament] });
+                $("a", $next).attr("href", data.next.link)
+                             .text(next.host + " - " + next.guest);
+                $("time", $next).attr("title", DTF_LONG.format(next.date))
+                                .text(DTF_SHORT.format(next.date));
+                $("img:last", $next).attr({ "src":   IMG_DIR + channel + ".svg",
+                                            "alt":   CHANNELS[channel],
+                                            "title": CHANNELS[channel] });
+            }
+        } // display()
+
+        update() {
+            // Si la page est cachée : ne pas actualiser les données et indiquer
+            // qu'il faudra mettre à jour les données quand l'utilisateur
+            // reviendra sur la page.
+            if (document.hidden) {
+                this.cron.stop();
+                return;
+            }
+            this.cron.start();
+
+            extract().then(this.display.bind(this));
+        } // update()
+
+        wake() {
+            if (!this.cron.status()) {
+                this.update();
+            }
+        } // wake()
+
+        createdCallback() {
+            const template = owner.querySelector("template").content;
+            const clone = owner.importNode(template, true);
+            this.appendChild(clone);
+        } // createdCallback()
+
+        attachedCallback() {
+            document.addEventListener("visibilitychange", this.wake.bind(this));
+            this.update();
+        } // attachedCallback()
+    });
+})();

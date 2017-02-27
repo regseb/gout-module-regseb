@@ -1,13 +1,26 @@
-.community-regseb-googlecalendar {
+community-regseb-googlecalendar {
     background-image: url("img/icon.svg");
     background-position: right 0.7em center;
     background-repeat: no-repeat;
     background-size: auto calc(100% - 1.4em);
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    line-height: 1.4em;
 }
-.community-regseb-googlecalendar p {
+community-regseb-googlecalendar a {
+    color: white;
+    text-decoration: none;
+}
+community-regseb-googlecalendar a:visited {
+    color: black;
+}
+community-regseb-googlecalendar a:hover {
+    text-decoration: underline;
+}
+community-regseb-googlecalendar p {
     margin: 0.7em;
 }
-.community-regseb-googlecalendar button {
+community-regseb-googlecalendar button {
     background-color: black;
     border: medium none;
     border-radius: 0.2em;
@@ -21,30 +34,30 @@
     font-size: 10px;
     padding: 0.7em;
 }
-.community-regseb-googlecalendar button:hover {
+community-regseb-googlecalendar button:hover {
     filter: brightness(1.2);
 }
-.community-regseb-googlecalendar p a {
+community-regseb-googlecalendar p a {
     color: black;
     display: none;
 }
-.community-regseb-googlecalendar ul {
+community-regseb-googlecalendar ul {
     color: white;
     list-style-type: none;
     margin: 0.7em;
     padding-left: 0;
 }
-.community-regseb-googlecalendar li {
+community-regseb-googlecalendar li {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.community-regseb-googlecalendar time {
+community-regseb-googlecalendar time {
     display: inline-block;
     width: 5.6em;
 }
-.community-regseb-googlecalendar span {
+community-regseb-googlecalendar span {
     display: inline-block;
     text-align: center;
     width: 4.9em;

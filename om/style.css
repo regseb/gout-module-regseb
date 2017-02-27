@@ -1,9 +1,13 @@
-.community-regseb-om {
+community-regseb-om {
     background-image: url("img/icon.svg");
     background-position: 0.7em center;
     background-repeat: no-repeat;
+    background-size: auto calc(100% - 1.4em);
+    font-family: Verdana, sans-serif;
+    font-size: 10px;
+    line-height: 1.4em;
 }
-.community-regseb-om p {
+community-regseb-om p {
     color: white;
     display: block;
     margin-bottom: 0;
@@ -14,15 +18,22 @@
     white-space: nowrap;
     width: 100%;
 }
-.community-regseb-om p:first-child {
+community-regseb-om p:first-of-type {
     margin-top: 0.7em;
 }
-.community-regseb-om p:last-child {
+community-regseb-om p:last-of-type {
     margin-bottom: 0.7em;
 }
-.community-regseb-om p a {
+community-regseb-om p a {
     color: white;
+    text-decoration: none;
 }
-.community-regseb-om img {
+community-regseb-om p a:visited {
+    color: black;
+}
+community-regseb-om p a:hover {
+    text-decoration: underline;
+}
+community-regseb-om img {
     vertical-align: middle;
 }
