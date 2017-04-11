@@ -20,11 +20,11 @@
         "unknown":           "Inconnue"
     };
     const CHANNELS = {
-        "bein1":                  "Bein Sport 1",
-        "bein2":                  "Bein Sport 2",
+        "bein1":                  "Bein Sports 1",
+        "bein2":                  "Bein Sports 2",
         "canalplus":              "Canal+",
         "canalplussport":         "Canal+ Sport",
-        "canalplussport_bein1":   "Canal+ Sport / Bein Sport 1",
+        "canalplussport_bein1":   "Canal+ Sport / Bein Sports 1",
         "eurosport2":             "Eurosport 2",
         "france3":                "France 3",
         "france3_canalplussport": "France 3 / Canal+ Sport",
@@ -140,10 +140,6 @@
 
             this.style.backgroundColor = config.color || "#03a9f4";
         } // setFiles()
-
-        setScrapers() {
-            // Ne rien faire.
-        } // setScrapers()
 
         display(data) {
             // Afficher le dernier match joué.

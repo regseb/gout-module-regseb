@@ -33,10 +33,6 @@
             $("button", this).click(this.open.bind(this));
         } // setFiles()
 
-        setScrapers() {
-            // Ne rien faire.
-        } // setScrapers()
-
         extract(size, token, query, index) {
             let url = GMAIL_API_URL + "users/me/messages?access_token=" +
                       token + "&q=" + query + "&maxResults=" + size;

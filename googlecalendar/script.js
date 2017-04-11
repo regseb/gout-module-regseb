@@ -51,10 +51,6 @@
             $("button", this).click(this.open.bind(this));
         } // setFiles()
 
-        setScrapers() {
-            // Ne rien faire.
-        } // setScrapers()
-
         extract(calendars, size, token, index) {
             const promises = calendars.map(function (calendar) {
                 const url = CALENDAR_API_URL + "calendars/" +

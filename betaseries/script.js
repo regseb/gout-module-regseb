@@ -31,10 +31,6 @@
             $("button", this).click(this.open.bind(this));
         } // setFiles()
 
-        setScrapers() {
-            // Ne rien faire.
-        } // setScrapers()
-
         extract(size, key, token, shows) {
             const url = API_URL + "episodes/list?key=" + key + "&token=" +
                         token + "&limit=" + size;

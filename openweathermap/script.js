@@ -64,10 +64,6 @@
             $("h1", this).text(config.title || this.city.split(",")[0]);
         } // setFiles()
 
-        setScrapers() {
-            // Ne rien faire.
-        } // setScrapers()
-
         display(data) {
             const $li = $("<li>");
             let $p = $("<p>");
