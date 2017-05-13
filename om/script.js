@@ -24,14 +24,19 @@
         "bein2":                  "Bein Sports 2",
         "canalplus":              "Canal+",
         "canalplussport":         "Canal+ Sport",
+        "canalplus_bein1":        "Canal+ / Bein Sports 1",
         "canalplussport_bein1":   "Canal+ Sport / Bein Sports 1",
         "eurosport2":             "Eurosport 2",
+        "footplus":               "Foot+",
+        "france2":                "France 2",
         "france3":                "France 3",
         "france3_canalplussport": "France 3 / Canal+ Sport",
+        "france4":                "France 4",
         "omnet":                  "OM.net",
         "undisclosed":            "Non communiquée",
         "unknown":                "Inconnue",
-        "w9":                     "W9"
+        "w9":                     "W9",
+        "w9_bein1":               "W9 / Bein Sports 1"
     };
     // dd/MM HH:mm.
     const DTF_SHORT = new Intl.DateTimeFormat("fr-FR", {
@@ -69,16 +74,21 @@
             return "undisclosed";
         }
         switch (/\/([^/]+)\.png$/.exec($img.attr("data-src"))[1]) {
+            case "150717_foot_plus":            return "footplus";
             case "150727_cplusport":            return "canalplussport";
             case "150916_bein2_ok_0":           return "bein2";
+            case "beinsport1-transparent":      return "bein1";
             case "canalplus-logo-ok-min":       return "canalplus";
+            case "canal-beinsport1-min":        return "canalplus_bein1";
+            case "canal-plus-sport-beinsport1": return "canalplussport_bein1";
             case "eurosport_2":                 return "eurosport2";
+            case "france2-logo-ok-min":         return "france2";
             case "france3_canalplussport":      return "france3_canalplussport";
             case "france3-logo-ok-min":         return "france3";
+            case "france4-logo-ok-min":         return "france4";
             case "logo-omnet":                  return "omnet";
             case "logo-w9-min":                 return "w9";
-            case "canal-plus-sport-beinsport1": return "canalplussport_bein1";
-            case "beinsport1-transparent":      return "bein1";
+            case "w9-beinsport1-min":           return "w9_bein1";
             default:                            return "unknown";
         }
     }; // reckonChannel()
