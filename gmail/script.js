@@ -147,8 +147,7 @@
                 "url": OAUTH_API_URL + "auth?response_type=code&client_id=" +
                        this.key + "&redirect_uri=" +
                        encodeURIComponent(browser.identity.getRedirectURL()) +
-                       "&scope=https://mail.google.com/,gmail.modify," +
-                              "gmail.readonly" +
+                       "&scope=https://www.googleapis.com/auth/gmail.readonly" +
                        "&access_type=offline&prompt=select_account consent",
                 "interactive": true
             };
