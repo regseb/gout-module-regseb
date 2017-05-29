@@ -17,6 +17,9 @@ community-regseb-tv li > img,
 community-regseb-tv span {
     margin-right: 0.3em;
 }
+community-regseb-tv li > img:first-child {
+    opacity: 0.8;
+}
 community-regseb-tv a {
     color: white;
     text-decoration: none;
