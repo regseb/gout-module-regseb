@@ -36,11 +36,11 @@
                         token + "&limit=" + size;
             return $.getJSON(url).then(function (data) {
                 const items = [];
-                for (let show of data.shows) {
+                for (const show of data.shows) {
                     if (null !== shows && !shows.includes(show.title)) {
                         continue;
                     }
-                    for (let item of show.unseen) {
+                    for (const item of show.unseen) {
                         items.push({
                             "title":   item.title,
                             "desc":    item.description,
@@ -107,7 +107,7 @@
                     $("p", that).hide();
                     $("ul", that).show()
                                  .empty();
-                    for (let item of items) {
+                    for (const item of items) {
                         that.display(item);
                     }
                 }

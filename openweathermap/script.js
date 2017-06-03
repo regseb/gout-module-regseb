@@ -36,7 +36,7 @@
                     "&units=metrics&lang=fr&cnt=2&APPID=" + appid;
         return $.getJSON(url).then(function (data) {
             const items = [];
-            for (let item of data.list) {
+            for (const item of data.list) {
                 items.push({
                     "icon": item.weather[0].icon,
                     "desc": item.weather[0].description,

@@ -158,7 +158,7 @@
                     $("p", that).hide();
                     $("ul", that).show()
                                  .empty();
-                    for (let item of items) {
+                    for (const item of items) {
                         that.display(item);
                     }
                 }

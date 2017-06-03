@@ -46,7 +46,7 @@
                           "?access_token=" + token + "&format=metadata";
                     return $.getJSON(url).then(function (item) {
                         const headers = {};
-                        for (let header of item.payload.headers) {
+                        for (const header of item.payload.headers) {
                             headers[header.name] = header.value;
                         }
                         return {
@@ -88,7 +88,7 @@
                     $("p", that).hide();
                     $("ul", that).show()
                                  .empty();
-                    for (let item of items) {
+                    for (const item of items) {
                         that.display(item);
                     }
                 }
