@@ -5,6 +5,7 @@
                                                                  .ownerDocument;
 
     const API_URL = "https://api.betaseries.com/";
+    const IMG_DIR = "widget/community/regseb/betaseries/img/";
 
     const $    = require("jquery");
     const Cron = require("scronpt");
@@ -20,6 +21,7 @@
                                        "s{season}e{episode} : {title} ({show})";
             this.key = config.key;
             this.secret = config.secret;
+            this.resources = {};
 
             this.style.backgroundColor = config.color || "#2196f3";
             if (undefined !== icon) {
@@ -32,6 +34,7 @@
         } // setFiles()
 
         extract(size, key, token, shows) {
+            const that = this;
             const url = API_URL + "episodes/list?key=" + key + "&token=" +
                         token + "&limit=" + size;
             return $.getJSON(url).then(function (data) {
@@ -47,7 +50,7 @@
                             "season":  item.season,
                             "episode": item.episode,
                             "show":    show.title,
-                            "link":    this.resources[show.id] +
+                            "link":    that.resources[show.id] +
                                        item.code.toLowerCase(),
                             "guid":    item.id,
                             "status":  item.user.downloaded ? "watch"
@@ -61,30 +64,31 @@
         } // extract()
 
         display(data) {
-            const $img = $("<button>").click(this.post.bind(this));
+            const text = this.format
+                    .replace("{show}", data.show)
+                    .replace("{season}",
+                             data.season.toString().padStart(2, "0"))
+                    .replace("{episode}",
+                             data.episode.toString().padStart(2, "0"))
+                    .replace("{title}", data.title);
+
+            const $li = $("<li>");
+            $li.data({ "guid":   data.guid,
+                       "status": data.status });
+
+            const $img = $("<img>").click(this.post.bind(this));
             if ("download" === data.status) {
-                $img.attr("title", "Marquer comme récupéré")
-                    .text("●");
+                $img.attr("src", IMG_DIR + "record.svg");
             } else {
-                $img.attr("title", "Marquer comme vu")
-                    .text("▶");
+                $img.attr("src", IMG_DIR + "play.svg");
             }
+            $li.append($img)
+               .append($("<a>").attr({ "href":   data.link,
+                                       "target": "_blank" })
+                               .text(text))
+               .append($("<span>").text(data.desc));
 
-            const text = this.format.replace("{show}", data.show)
-                                    .replace("{season}",
-                                             data.season.padStart(2, "0"))
-                                    .replace("{episode}",
-                                             data.episode.padStart(2, "0"))
-                                    .replace("{title}", data.title);
-
-            $("ul", this).append(
-                $("<li>").data({ "guid":   data.guid,
-                                 "status": data.status })
-                         .append($img)
-                         .append($("<a>").attr({ "href":   data.link,
-                                                 "target": "_blank",
-                                                 "title":  data.desc })
-                                         .text(text)));
+            $("ul", this).append($li);
         } // display()
 
         update() {
@@ -127,19 +131,19 @@
         init(key, token, shows) {
             // Récupérer les identifiants des séries regardées par
             // l'utilisateur.
+            const that = this;
             let url = API_URL + "episodes/list?key=" + key + "&token=" + token +
                       "&limit=1";
             $.getJSON(url).then(function (data) {
                 // Filtrer les séries non-affichées dans cette passerelle.
                 const promises = data.shows.filter(function (show) {
-                    return !(show.id in this.resources) &&
-                           (null === shows || shows.includes(show.title));
+                    return null === shows || shows.includes(show.title);
                 }).map(function (show) {
                     // Récupérer l'URL vers les pages Internet des épisodes.
                     url = API_URL + "shows/display?key=" + key + "&id=" +
                           show.id;
                     return $.getJSON(url).then(function (infos) {
-                        this.resources[show.id] =
+                        that.resources[show.id] =
                                 infos.show["resource_url"]
                                          .replace("/serie/", "/episode/") + "/";
                     });

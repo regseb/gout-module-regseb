@@ -7,6 +7,16 @@ community-regseb-betaseries {
     font-size: 10px;
     line-height: 1.4em;
 }
+community-regseb-betaseries a {
+    color: white;
+    text-decoration: none;
+}
+community-regseb-betaseries a:visited {
+    color: black;
+}
+community-regseb-betaseries a:hover {
+    text-decoration: underline;
+}
 community-regseb-betaseries p {
     margin: 0.7em;
 }
@@ -23,15 +33,14 @@ community-regseb-betaseries button {
     cursor: pointer;
     font-size: 10px;
     padding: 0.7em;
+    transition: 0.2s ease-out;
 }
 community-regseb-betaseries button:hover {
     filter: brightness(1.2);
 }
 community-regseb-betaseries p a {
+    color: black;
     display: none;
-}
-community-regseb-betaseries p a:visited {
-    color: white;
 }
 community-regseb-betaseries ul {
     display: none;
@@ -39,15 +48,40 @@ community-regseb-betaseries ul {
     margin: 0.7em;
     padding-left: 0;
 }
-community-regseb-betaseries ul button {
+community-regseb-betaseries ul img {
+    cursor: pointer;
+    float: left;
     height: 10px;
-    line-height: 5px;
     margin-right: 0.3em;
-    padding: 0;
-    width: 14px;
+    margin-top: 2px;
+    opacity: 0.8;
+    transition: 0.2s ease-out;
+    width: 10px;
+}
+community-regseb-betaseries ul img:hover {
+    opacity: 1;
 }
 community-regseb-betaseries ul a {
+    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+community-regseb-betaseries ul li span {
+    background-color: black;
+    color: white;
+    margin-right: 0.7em;
+    margin-top: 0.7em;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0.7em;
+    position: absolute;
+    text-align: justify;
+    visibility: hidden;
+}
+community-regseb-betaseries ul li:hover span {
+    opacity: 1;
+    transition: z-index 1s linear, opacity 0.5s linear 1s;
+    visibility: visible;
+    z-index: 1;
 }
