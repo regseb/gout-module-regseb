@@ -24,7 +24,7 @@ TODO.
 ## Exemple
 
 Cet exemple donne le programme télévisé de toutes les chaines de la TNT sauf
-Canal+, BFM TV, iTELE et Franceinfo.
+Canal+, BFM TV, CNews et Franceinfo.
 
 ```JSON
 {
