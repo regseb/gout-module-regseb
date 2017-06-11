@@ -79,7 +79,7 @@ community-regseb-betaseries ul li span {
     text-align: justify;
     visibility: hidden;
 }
-community-regseb-betaseries ul li:hover span {
+community-regseb-betaseries ul li a:hover + span {
     opacity: 1;
     transition: z-index 1s linear, opacity 0.5s linear 1s;
     visibility: visible;
