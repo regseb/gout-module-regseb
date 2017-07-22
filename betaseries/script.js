@@ -78,9 +78,11 @@
 
             const $img = $("<img>").click(this.post.bind(this));
             if ("download" === data.status) {
-                $img.attr("src", IMG_DIR + "record.svg");
+                $img.attr({ "src":   IMG_DIR + "record.svg",
+                            "title": "Marquer comme récupéré" });
             } else {
-                $img.attr("src", IMG_DIR + "play.svg");
+                $img.attr({ "src":   IMG_DIR + "play.svg",
+                            "title": "Marquer comme vu" });
             }
             $li.append($img)
                .append($("<a>").attr({ "href":   data.link,
