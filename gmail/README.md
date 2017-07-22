@@ -39,6 +39,10 @@ de Gout :
 
 Ensuite, activez la *Gmail API*.
 
+Puis il faut rejoindre le groupe *[Allow Risky Access Permissions By Unreviewed
+Apps](https://groups.google.com/forum/#!forum/risky-access-by-unreviewed-apps)*
+avec les comptes Google que vous souhaitez consulter.
+
 ## Scraper
 
 Ce widget n'utilise pas de scraper.
