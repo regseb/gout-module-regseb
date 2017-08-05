@@ -175,7 +175,8 @@
                 $("img:first", $next).attr({
                     "src":   IMG_DIR + tournament + ".svg",
                     "alt":   TOURNAMENTS[tournament],
-                    "title": TOURNAMENTS[tournament] });
+                    "title": TOURNAMENTS[tournament]
+                });
                 $("a", $next).attr("href", data.next.link)
                              .text(next.host + " - " + next.guest);
                 $("time", $next).attr("title", DTF_LONG.format(next.date))
