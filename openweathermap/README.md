@@ -1,7 +1,7 @@
 # community/regseb/openweathermap
 
 Ce widget affiche la météo d'une ville. Les prévisions sont récupérées du
-service [OpenWeatherMap](//openweathermap.org/).
+service [OpenWeatherMap](https://openweathermap.org/).
 
 ## Configuration
 
@@ -24,7 +24,8 @@ Les dimensions conseillées sont **14x13**.
 ### `"appid"`
 
 Pour se connecter à l'API, il vous faut une clé qui s'obtient en s'inscrivant
-sur le site Internet du service : <//home.openweathermap.org/users/sign_up>
+sur le site Internet du service :
+<https://home.openweathermap.org/users/sign_up>
 
 ## Scraper
 

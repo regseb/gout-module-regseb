@@ -1,7 +1,7 @@
 # community/regseb/googlecalendar
 
 Ce widget affiche les prochains évènements d'un
-**[Google Agenda](//www.google.com/calendar)**.
+**[Google Agenda](https://www.google.com/calendar)**.
 
 ## Configuration
 
@@ -30,7 +30,7 @@ souhaitez avoir les *N* prochains évènements : il faut fixer la hauteur à
 ### `"key"` et `"secret"`
 
 Pour obtenir un identifiant, allez dans la
-***[Console des API Google](//console.developers.google.com/)***. Créez un
+***[Console des API Google](https://console.developers.google.com/)***. Créez un
 projet, puis *Créez des identifiants* pour obtenir un *ID client OAuth* de type
 *Application Web*. Laissez vide les champs pour définir les *Origines JavaScript
 autorisées*. Pour les *URI de redirection autorisés*, ajoutez les deux adresse

@@ -5,7 +5,7 @@
 ## Description
 
 Ce projet contient des widgets pour l'agrégateur d'Internet
-**[Gout](//github.com/regseb/gout)**.
+**[Gout](https://github.com/regseb/gout)**.
 
 ## Installation
 
@@ -17,5 +17,5 @@ git submodule add -f https://github.com/regseb/gout-widget-regseb.git src/widget
 
 ## Licence
 
-Ces widgets sont publiés sous la [Licence Publique de l’Union européenne - EUPL
-v.1.1](//joinup.ec.europa.eu/software/page/eupl/licence-eupl).
+Ces widgets sont publiés sous la [licence publique de l’Union européenne - EUPL
+v1.2](https://joinup.ec.europa.eu/community/eupl/og_page/eupl-text-11-12).

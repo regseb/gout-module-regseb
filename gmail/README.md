@@ -1,7 +1,7 @@
 # community/regseb/gmail
 
 Ce widget affiche les derniers courriels reçus sur une boite
-**[Gmail](//mail.google.com/)**.
+**[Gmail](https://mail.google.com/)**.
 
 ## Configuration
 
@@ -11,7 +11,7 @@ contenant un objet
 propriétés suivantes :
 
 - `"query"` (optionnel - valeur par défaut : `"is:unread"`) : le
-  [filtre](//support.google.com/mail/answer/7190) des courriels affichés ;
+  [filtre](https://support.google.com/mail/answer/7190) des courriels affichés ;
 - `"color"` (optionnel - valeur par défaut : `"#f44336"`) : la couleur de fond
   du cadre (au format hexadécimale, régulier RGB ou avec des mots-clefs
   prédéfinis) ;
@@ -28,7 +28,7 @@ avoir les *N* derniers courriel : il faut fixer la hauteur à *N + 1*.
 ### `"key"` et `"secret"`
 
 Pour obtenir un identifiant, allez dans la
-***[Console des API Google](//console.developers.google.com/)***. Créez un
+***[Console des API Google](https://console.developers.google.com/)***. Créez un
 projet, puis *Créez des identifiants* pour obtenir un *ID client OAuth* de type
 *Application Web*. Laissez vide les champs pour définir les *Origines JavaScript
 autorisées*. Pour les *URI de redirection autorisés*, ajoutez les deux adresse
@@ -61,7 +61,7 @@ sont dans la boite de réception.
             "config.json": {
                 "query": "is:unread in:inbox",
                 "key": "88198.apps.googleusercontent.com (une clé de ce style)",
-                "secret": "sdlkfjaskd (un code de ce style)"
+                "secret": "sdlkfjaskd (un code de ce style)",
                 "cron": "* * * * *"
             }
         }

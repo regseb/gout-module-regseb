@@ -1,7 +1,7 @@
 # community/regseb/om
 
 Ce widget affiche le résultat du dernier match de
-l'**[Olympique de Marseille](//www.om.net/)** et des informations sur le
+l'**[Olympique de Marseille](https://www.om.net/)** et des informations sur le
 prochain match.
 
 ## Configuration

@@ -2,7 +2,7 @@
 
 Ce widget affiche les prochains épisodes de séries à récupérer et/ou voir. La
 liste est récupérée de votre compte du site
-**[BetaSeries](//www.betaseries.com/)**.
+**[BetaSeries](https://www.betaseries.com/)**.
 
 ## Configuration
 
@@ -18,7 +18,8 @@ propriétés suivantes :
 - `"color"` (optionnel - valeur par défaut : `"#2196f3"`) : la couleur de fond
   du cadre (au format hexadécimale, régulier RGB ou avec des mots-clefs
   prédéfinis) ;
-- `"key"` : votre [clé pour l'API](//www.betaseries.com/api/) de BetaSeries ;
+- `"key"` : votre [clé pour l'API](https://www.betaseries.com/api/) de
+  BetaSeries ;
 - `"secret"` : votre clé secrète pour l'API de BetaSeries ;
 - `"cron"` (optionnel - valeur par défaut : `"0 0 * * *"`) : la notation cron
   indiquant la fréquence de mise à jour.
@@ -37,7 +38,7 @@ Ce widget n'utilise pas de scraper.
 ## Exemple
 
 Cet exemple affiche la liste des épisodes à récupérer et/ou voir pour la série
-[The IT Crowd](//www.betaseries.com/serie/itcrowd) (avec une mise à jour à
+[The IT Crowd](https://www.betaseries.com/serie/itcrowd) (avec une mise à jour à
 minuit).
 
 ```JSON
