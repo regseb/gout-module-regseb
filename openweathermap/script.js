@@ -7,7 +7,7 @@
     const $    = require("jquery");
     const Cron = require("scronpt");
 
-    const API_URL = "http://api.openweathermap.org/data/2.5/";
+    const API_URL = "https://api.openweathermap.org/data/2.5/";
     const IMG_DIR = "widget/community/regseb/openweathermap/img/";
 
     const extract = function (city, appid, kind) {
