@@ -31,7 +31,7 @@
 
             // Ajouter un écouteur sur le bouton de connexion.
             $("button", this).click(this.open.bind(this));
-        } // setFiles()
+        }
 
         extract(size, token, query, index) {
             let url = GMAIL_API_URL + "users/me/messages?access_token=" +
@@ -58,7 +58,7 @@
                     });
                 }));
             });
-        } // extract()
+        }
 
         display(data) {
             $("ul", this).append(
@@ -66,7 +66,7 @@
                                                "target": "_blank",
                                                "title":  data.desc })
                                        .text(data.title)));
-        } // display()
+        }
 
         update() {
             // Si la page est cachée : ne pas actualiser les données et indiquer
@@ -93,7 +93,7 @@
                     }
                 }
             });
-        } // update()
+        }
 
         refresh() {
             const url = TOKEN_API_URL + "token";
@@ -109,7 +109,7 @@
                 setTimeout(that.refresh.bind(that),
                            (data["expires_in"] - 60) * 1000);
             });
-        } // refresh()
+        }
 
         access(responseUrl) {
             const response = new URL(responseUrl);
@@ -140,7 +140,7 @@
                                           that.wake.bind(that));
                 that.update();
             });
-        } // access()
+        }
 
         open() {
             const details = {
@@ -153,22 +153,22 @@
             };
             browser.identity.launchWebAuthFlow(details)
                             .then(this.access.bind(this));
-        } // open()
+        }
 
         wake() {
             if (!this.cron.status()) {
                 this.update();
             }
-        } // wake()
+        }
 
         createdCallback() {
             const template = owner.querySelector("template").content;
             const clone = owner.importNode(template, true);
             this.appendChild(clone);
-        } // createdCallback()
+        }
 
         attachedCallback() {
             this.size = parseInt(this.style.height, 10) / 14 - 1;
-        } // attachedCallback()
+        }
     });
 })();

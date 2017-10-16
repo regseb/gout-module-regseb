@@ -49,7 +49,7 @@
             }
             return items;
         });
-    }; // extract()
+    };
 
     document.registerElement("community-regseb-openweathermap",
                              class extends HTMLElement {
@@ -62,7 +62,7 @@
 
             this.style.backgroundColor = config.color || "#03a9f4";
             $("h1", this).text(config.title || this.city.split(",")[0]);
-        } // setFiles()
+        }
 
         display(data) {
             const $li = $("<li>");
@@ -120,7 +120,7 @@
             $li.append($p);
 
             $("ul", this).append($li);
-        } // display()
+        }
 
         update() {
             // Si la page est cachée : ne pas actualiser les données et indiquer
@@ -143,23 +143,23 @@
             extract(this.city, this.appid, "forecast").then(function (items) {
                 items.forEach(that.display.bind(that));
             });
-        } // update()
+        }
 
         wake() {
             if (!this.cron.status()) {
                 this.update();
             }
-        } // wake()
+        }
 
         createdCallback() {
             const template = owner.querySelector("template").content;
             const clone = owner.importNode(template, true);
             this.appendChild(clone);
-        } // createdCallback()
+        }
 
         attachedCallback() {
             document.addEventListener("visibilitychange", this.wake.bind(this));
             this.update();
-        } // attachedCallback()
+        }
     });
 })();

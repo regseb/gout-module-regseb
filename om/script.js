@@ -67,7 +67,7 @@
             case "521": return "coupe_ligue";
             default:    return "unknown";
         }
-    }; // reckonTournament()
+    };
 
     const reckonChannel = function ($img) {
         if (0 === $img.length) {
@@ -91,7 +91,7 @@
             case "w9-beinsport1-min":           return "w9_bein1";
             default:                            return "unknown";
         }
-    }; // reckonChannel()
+    };
 
     const extract = function () {
         const url = "https://www.om.net/calendrier-resultats";
@@ -138,7 +138,7 @@
 
             return { last, next };
         });
-    }; // extract()
+    };
 
     document.registerElement("community-regseb-om",
                              class extends HTMLElement {
@@ -149,7 +149,7 @@
                                  this.update.bind(this));
 
             this.style.backgroundColor = config.color || "#03a9f4";
-        } // setFiles()
+        }
 
         display(data) {
             // Afficher le dernier match joué.
@@ -185,7 +185,7 @@
                                             "alt":   CHANNELS[channel],
                                             "title": CHANNELS[channel] });
             }
-        } // display()
+        }
 
         update() {
             // Si la page est cachée : ne pas actualiser les données et indiquer
@@ -198,23 +198,23 @@
             this.cron.start();
 
             extract().then(this.display.bind(this));
-        } // update()
+        }
 
         wake() {
             if (!this.cron.status()) {
                 this.update();
             }
-        } // wake()
+        }
 
         createdCallback() {
             const template = owner.querySelector("template").content;
             const clone = owner.importNode(template, true);
             this.appendChild(clone);
-        } // createdCallback()
+        }
 
         attachedCallback() {
             document.addEventListener("visibilitychange", this.wake.bind(this));
             this.update();
-        } // attachedCallback()
+        }
     });
 })();

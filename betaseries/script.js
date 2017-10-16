@@ -31,7 +31,7 @@
 
             // Ajouter un écouteur sur le bouton de connexion.
             $("button", this).click(this.open.bind(this));
-        } // setFiles()
+        }
 
         extract(size, key, token, shows) {
             const that = this;
@@ -61,7 +61,7 @@
                 }
                 return items.sort((a, b) => a.date - b.date).slice(0, size);
             });
-        } // extract()
+        }
 
         display(data) {
             const text = this.format
@@ -91,7 +91,7 @@
                .append($("<span>").text(data.desc));
 
             $("ul", this).append($li);
-        } // display()
+        }
 
         update() {
             // Si la page est cachée : ne pas actualiser les données et indiquer
@@ -118,7 +118,7 @@
                     }
                 }
             });
-        } // update()
+        }
 
         post(event) {
             const $li = $(event.target).closest("li");
@@ -128,7 +128,7 @@
             const url = API_URL + "episodes/" + status + "ed?key=" + this.key +
                         "&token=" + this.token + "&id=" + guid;
             $.post(url).then(this.update.bind(this));
-        } // post()
+        }
 
         init(key, token, shows) {
             // Récupérer les identifiants des séries regardées par
@@ -152,7 +152,7 @@
                 });
                 return Promise.all(promises);
             }).then(this.update.bind(this));
-        } // init()
+        }
 
         access(responseUrl) {
             const response = new URL(responseUrl);
@@ -176,7 +176,7 @@
                                           that.wake.bind(that));
                 that.init(that.key, that.token, that.shows);
             });
-        } // access()
+        }
 
         open() {
             const details = {
@@ -187,22 +187,22 @@
             };
             browser.identity.launchWebAuthFlow(details)
                             .then(this.access.bind(this));
-        } // open()
+        }
 
         wake() {
             if (!this.cron.status()) {
                 this.update();
             }
-        } // wake()
+        }
 
         createdCallback() {
             const template = owner.querySelector("template").content;
             const clone = owner.importNode(template, true);
             this.appendChild(clone);
-        } // createdCallback()
+        }
 
         attachedCallback() {
             this.size = parseInt(this.style.height, 10) / 14 - 1;
-        } // attachedCallback()
+        }
     });
 })();
