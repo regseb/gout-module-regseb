@@ -33,11 +33,8 @@ Pour obtenir un identifiant, allez dans la
 ***[Console des API Google](https://console.developers.google.com/)***. Créez un
 projet, puis *Créez des identifiants* pour obtenir un *ID client OAuth* de type
 *Application Web*. Laissez vide les champs pour définir les *Origines JavaScript
-autorisées*. Pour les *URI de redirection autorisés*, ajoutez les deux adresse
-de Gout :
-
-- `https://e7ca15c1c9d74876c655f32cebd95dfd8c7afc15.extensions.allizom.org/`
-- `https://jgmpleepfnjaaihkcadaphgjecnglldo.chromiumapp.org/`
+autorisées*. Pour les *URI de redirection autorisés*, ajoutez l'adresse fournit
+par le widget.
 
 Ensuite, activez la *Calendar API*.
 

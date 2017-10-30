@@ -29,8 +29,16 @@
             $("p a", this).attr("href", "https://mail.google.com/mail/u/" +
                                         (config.index || 0));
 
-            // Ajouter un écouteur sur le bouton de connexion.
-            $("button", this).click(this.open.bind(this));
+            $("dialog input[type=\"url\"]", this).val(
+                                             browser.identity.getRedirectURL());
+
+            // Ajouter des écouteurs sur les boutons de connexion et
+            // d'information.
+            $("p button:first", this).click(this.open.bind(this));
+            $("p button:last", this).click(this.info.bind(this));
+
+            $("dialog input[type=\"button\"]", this).click(
+                                                          this.copy.bind(this));
         }
 
         extract(size, token, query, index) {
@@ -153,6 +161,18 @@
             };
             browser.identity.launchWebAuthFlow(details)
                             .then(this.access.bind(this));
+        }
+
+        info() {
+            const dialog = $("dialog", this)[0];
+            dialogPolyfill.registerDialog(dialog);
+            dialog.showModal();
+            $("dialog input[type=\"url\"]", this)[0].select();
+        }
+
+        copy() {
+            $("dialog input[type=\"url\"]", this)[0].select();
+            document.execCommand("copy");
         }
 
         wake() {
