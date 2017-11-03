@@ -17,5 +17,5 @@ git submodule add -f https://github.com/regseb/gout-widget-regseb.git src/widget
 
 ## Licence
 
-Ces widgets sont publiés sous la [licence publique de l’Union européenne - EUPL
-v1.2](https://joinup.ec.europa.eu/community/eupl/og_page/eupl-text-11-12).
+Les widgets sont publiés sous la [licence publique de l’Union européenne - EUPL
+v1.2](https://joinup.ec.europa.eu/page/eupl-text-11-12).
