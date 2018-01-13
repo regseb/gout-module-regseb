@@ -1,12 +1,12 @@
 # community/regseb/tv
 
-Ce widget donne le **programme télévisé** du soir.
+Ce module donne le **programme télévisé** du soir.
 
 ## Configuration
 
-Le répertoire de la passerelle doit avoir un fichier ***config.json***
-contenant un objet
-[JSON](http://www.json.org/json-fr.html "JavaScript Object Notation") avec la
+Le répertoire du widget doit avoir un fichier ***config.json*** contenant un
+objet
+[JSON](https://www.json.org/json-fr.html "JavaScript Object Notation") avec la
 propriété suivante :
 
 - `"color"` (optionnel - valeur par défaut : `"#e9e9e9"`) : la couleur de fond
@@ -29,7 +29,7 @@ Canal+, BFM TV, CNews et Franceinfo.
 ```JSON
 {
     "tv/tnt": {
-        "widget": "community/regseb/tv",
+        "module": "community/regseb/tv",
         "coord": { "x": 59, "y": 1, "w": 20, "h": 23 },
         "files": { "config.json": {} },
         "scrapers": [

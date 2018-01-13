@@ -1,14 +1,15 @@
-(function () {
-    "use strict";
-
-    const owner = (document["_currentScript"] || document.currentScript)
-                                                                 .ownerDocument;
-
+fetch("module/community/regseb/openweathermap/index.html").then(
+                                                           function (response) {
+    return response.text();
+}).then(function (data) {
+    return new DOMParser().parseFromString(data, "text/html")
+                          .querySelector("template");
+}).then(function (template) {
     const $    = require("jquery");
     const Cron = require("scronpt");
 
     const API_URL = "https://api.openweathermap.org/data/2.5/";
-    const IMG_DIR = "widget/community/regseb/openweathermap/img/";
+    const IMG_DIR = "module/community/regseb/openweathermap/img/";
 
     const extract = function (city, appid, kind) {
         // Si c'est la météo du jour qui est demandée.
@@ -51,17 +52,11 @@
         });
     };
 
-    document.registerElement("community-regseb-openweathermap",
-                             class extends HTMLElement {
+    customElements.define("community-regseb-openweathermap",
+                          class extends HTMLElement {
 
-        setFiles({ "config.json": config }) {
-            this.cron = new Cron(config.cron || "0 * * * *",
-                                 this.update.bind(this));
-            this.city = config.city;
-            this.appid = config.appid;
-
-            this.style.backgroundColor = config.color || "#03a9f4";
-            $("h1", this).text(config.title || this.city.split(",")[0]);
+        set files({ "config.json": config }) {
+            this._config = config;
         }
 
         display(data) {
@@ -151,15 +146,19 @@
             }
         }
 
-        createdCallback() {
-            const template = owner.querySelector("template").content;
-            const clone = owner.importNode(template, true);
-            this.appendChild(clone);
-        }
+        connectedCallback() {
+            this.appendChild(template.content.cloneNode(true));
 
-        attachedCallback() {
+            this.cron = new Cron(this._config.cron || "0 * * * *",
+                                 this.update.bind(this));
+            this.city = this._config.city;
+            this.appid = this._config.appid;
+
+            this.style.backgroundColor = this._config.color || "#03a9f4";
+            $("h1", this).text(this._config.title || this.city.split(",")[0]);
+
             document.addEventListener("visibilitychange", this.wake.bind(this));
             this.update();
         }
     });
-})();
+});

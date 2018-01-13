@@ -1,13 +1,13 @@
-(function () {
-    "use strict";
-
-    const owner = (document["_currentScript"] || document.currentScript)
-                                                                 .ownerDocument;
-
+fetch("module/community/regseb/om/index.html").then(function (response) {
+    return response.text();
+}).then(function (data) {
+    return new DOMParser().parseFromString(data, "text/html")
+                          .querySelector("template");
+}).then(function (template) {
     const $    = require("jquery");
     const Cron = require("scronpt");
 
-    const IMG_DIR = "widget/community/regseb/om/img/";
+    const IMG_DIR = "module/community/regseb/om/img/";
     const TOURNAMENTS = {
         "amical":            "Amical",
         "coupe_france":      "Coupe de France",
@@ -140,15 +140,10 @@
         });
     };
 
-    document.registerElement("community-regseb-om",
-                             class extends HTMLElement {
+    customElements.define("community-regseb-om", class extends HTMLElement {
 
-        setFiles({ "config.json": config }) {
-            // Par défaut, mettre à jour tous les matins à 7h.
-            this.cron = new Cron(config.cron || "0 7 * * *",
-                                 this.update.bind(this));
-
-            this.style.backgroundColor = config.color || "#03a9f4";
+        set files({ "config.json": config }) {
+            this._config = config;
         }
 
         display(data) {
@@ -206,15 +201,17 @@
             }
         }
 
-        createdCallback() {
-            const template = owner.querySelector("template").content;
-            const clone = owner.importNode(template, true);
-            this.appendChild(clone);
-        }
+        connectedCallback() {
+            this.appendChild(template.content.cloneNode(true));
 
-        attachedCallback() {
+            // Par défaut, mettre à jour tous les matins à 7h.
+            this.cron = new Cron(this._config.cron || "0 7 * * *",
+                                 this.update.bind(this));
+
+            this.style.backgroundColor = this._config.color || "#03a9f4";
+
             document.addEventListener("visibilitychange", this.wake.bind(this));
             this.update();
         }
     });
-})();
+});

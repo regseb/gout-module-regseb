@@ -1,36 +1,22 @@
-(function () {
-    "use strict";
-
-    const owner = (document["_currentScript"] || document.currentScript)
-                                                                 .ownerDocument;
-
+fetch("module/community/regseb/betaseries/index.html").then(
+                                                           function (response) {
+    return response.text();
+}).then(function (data) {
+    return new DOMParser().parseFromString(data, "text/html")
+                          .querySelector("template");
+}).then(function (template) {
     const API_URL = "https://api.betaseries.com/";
-    const IMG_DIR = "widget/community/regseb/betaseries/img/";
+    const IMG_DIR = "module/community/regseb/betaseries/img/";
 
     const $    = require("jquery");
     const Cron = require("scronpt");
 
-    document.registerElement("community-regseb-betaseries",
-                             class extends HTMLElement {
+    customElements.define("community-regseb-betaseries",
+                          class extends HTMLElement {
 
-        setFiles({ "config.json": config, "icon.svg": icon }) {
-            this.cron = new Cron(config.cron || "0 0 * * *", false,
-                                 this.update.bind(this));
-            this.shows = config.shows || null;
-            this.format = config.format ||
-                                       "s{season}e{episode} : {title} ({show})";
-            this.key = config.key;
-            this.secret = config.secret;
-            this.resources = {};
-
-            this.style.backgroundColor = config.color || "#2196f3";
-            if (undefined !== icon) {
-                this.style.backgroundImage = "url(\"data:image/svg+xml;" +
-                                             "base64," + btoa(icon) + "\")";
-            }
-
-            // Ajouter un écouteur sur le bouton de connexion.
-            $("button", this).click(this.open.bind(this));
+        set files({ "config.json": config, "icon.svg": icon }) {
+            this._config = config;
+            this._icon   = icon;
         }
 
         extract(size, key, token, shows) {
@@ -137,7 +123,7 @@
             let url = API_URL + "episodes/list?key=" + key + "&token=" + token +
                       "&limit=1";
             $.getJSON(url).then(function (data) {
-                // Filtrer les séries non-affichées dans cette passerelle.
+                // Filtrer les séries non-affichées dans ce widget.
                 const promises = data.shows.filter(function (show) {
                     return null === shows || shows.includes(show.title);
                 }).map(function (show) {
@@ -195,14 +181,28 @@
             }
         }
 
-        createdCallback() {
-            const template = owner.querySelector("template").content;
-            const clone = owner.importNode(template, true);
-            this.appendChild(clone);
-        }
-
-        attachedCallback() {
+        connectedCallback() {
+            this.appendChild(template.content.cloneNode(true));
             this.size = parseInt(this.style.height, 10) / 14 - 1;
+
+            this.cron = new Cron(this._config.cron || "0 0 * * *", false,
+                                 this.update.bind(this));
+            this.shows = this._config.shows || null;
+            this.format = this._config.format ||
+                                       "s{season}e{episode} : {title} ({show})";
+            this.key = this._config.key;
+            this.secret = this._config.secret;
+            this.resources = {};
+
+            this.style.backgroundColor = this._config.color || "#2196f3";
+            if (undefined !== this._icon) {
+                this.style.backgroundImage = "url(\"data:image/svg+xml;" +
+                                             "base64," + btoa(this._icon) +
+                                             "\")";
+            }
+
+            // Ajouter un écouteur sur le bouton de connexion.
+            $("button", this).click(this.open.bind(this));
         }
     });
-})();
+});

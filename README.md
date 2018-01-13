@@ -1,10 +1,10 @@
-# gout-widget-regseb
+# gout-module-regseb
 
-> Widgets pour Gout.
+> Modules pour Gout.
 
 ## Description
 
-Ce projet contient des widgets pour l'agrégateur d'Internet
+Ce projet contient des modules pour l'agrégateur d'Internet
 **[Gout](https://github.com/regseb/gout)**.
 
 ## Installation
@@ -12,10 +12,10 @@ Ce projet contient des widgets pour l'agrégateur d'Internet
 Placez vous à la racine du projet Gout et exécutez la commande ci-dessous :
 
 ```shell
-git submodule add -f https://github.com/regseb/gout-widget-regseb.git src/widget/community/regseb
+git submodule add -f https://github.com/regseb/gout-module-regseb.git src/module/community/regseb
 ```
 
 ## Licence
 
-Les widgets sont publiés sous la [licence publique de l’Union européenne - EUPL
+Les modules sont publiés sous la [licence publique de l’Union européenne - EUPL
 v1.2](https://joinup.ec.europa.eu/page/eupl-text-11-12).

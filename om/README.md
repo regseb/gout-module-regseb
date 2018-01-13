@@ -1,14 +1,14 @@
 # community/regseb/om
 
-Ce widget affiche le résultat du dernier match de
+Ce module affiche le résultat du dernier match de
 l'**[Olympique de Marseille](https://www.om.net/)** et des informations sur le
 prochain match.
 
 ## Configuration
 
-Le répertoire de la passerelle doit avoir un fichier ***config.json***
-contenant un objet
-[JSON](http://www.json.org/json-fr.html "JavaScript Object Notation") avec les
+Le répertoire du widget doit avoir un fichier ***config.json*** contenant un
+objet
+[JSON](https://www.json.org/json-fr.html "JavaScript Object Notation") avec les
 propriétés suivantes :
 
 - `"color"` (optionnel - valeur par défaut : `"#03a9f4"`) : la couleur de fond
@@ -21,7 +21,7 @@ Les dimensions conseillées sont **20x3**.
 
 ## Scraper
 
-Ce widget n'utilise pas de scraper.
+Ce module n'utilise pas de scraper.
 
 ## Exemple
 
@@ -31,7 +31,7 @@ sept heures.
 ```JSON
 {
     "om": {
-        "widget": "community/regseb/om",
+        "module": "community/regseb/om",
         "coord": { "x": 1, "y": 1, "w": 20, "h": 3 },
         "files": { "config.json": {} }
     }

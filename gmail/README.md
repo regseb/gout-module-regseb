@@ -1,13 +1,13 @@
 # community/regseb/gmail
 
-Ce widget affiche les derniers courriels reçus sur une boite
+Ce module affiche les derniers courriels reçus sur une boite
 **[Gmail](https://mail.google.com/)**.
 
 ## Configuration
 
-Le répertoire de la passerelle doit avoir un fichier ***config.json***
-contenant un objet
-[JSON](http://www.json.org/json-fr.html "JavaScript Object Notation") avec les
+Le répertoire du widget doit avoir un fichier ***config.json*** contenant un
+objet
+[JSON](https://www.json.org/json-fr.html "JavaScript Object Notation") avec les
 propriétés suivantes :
 
 - `"query"` (optionnel - valeur par défaut : `"is:unread"`) : le
@@ -32,7 +32,7 @@ Pour obtenir un identifiant, allez dans la
 projet, puis *Créez des identifiants* pour obtenir un *ID client OAuth* de type
 *Application Web*. Laissez vide les champs pour définir les *Origines JavaScript
 autorisées*. Pour les *URI de redirection autorisés*, ajoutez l'adresse fournit
-par le widget.
+par le module.
 
 Ensuite, activez la *Gmail API*.
 
@@ -42,7 +42,7 @@ avec les comptes Google que vous souhaitez consulter.
 
 ## Scraper
 
-Ce widget n'utilise pas de scraper.
+Ce module n'utilise pas de scraper.
 
 ## Exemple
 
@@ -52,7 +52,7 @@ sont dans la boite de réception.
 ```JSON
 {
     "gmail": {
-        "widget": "community/regseb/gmail",
+        "module": "community/regseb/gmail",
         "coord": { "x": 1, "y": 1, "w": 28, "h": 5 },
         "files": {
             "config.json": {

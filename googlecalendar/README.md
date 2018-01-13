@@ -1,13 +1,13 @@
 # community/regseb/googlecalendar
 
-Ce widget affiche les prochains évènements d'un
+Ce module affiche les prochains évènements d'un
 **[Google Agenda](https://www.google.com/calendar)**.
 
 ## Configuration
 
-Le répertoire de la passerelle doit avoir un fichier ***config.json***
-contenant un objet
-[JSON](http://www.json.org/json-fr.html "JavaScript Object Notation") avec les
+Le répertoire du widget doit avoir un fichier ***config.json*** contenant un
+objet
+[JSON](https://www.json.org/json-fr.html "JavaScript Object Notation") avec les
 propriétés suivantes :
 
 - `"calendars"` (optionnel - valeur par défaut : `["primary"]`) : la liste des
@@ -34,13 +34,13 @@ Pour obtenir un identifiant, allez dans la
 projet, puis *Créez des identifiants* pour obtenir un *ID client OAuth* de type
 *Application Web*. Laissez vide les champs pour définir les *Origines JavaScript
 autorisées*. Pour les *URI de redirection autorisés*, ajoutez l'adresse fournit
-par le widget.
+par le module.
 
 Ensuite, activez la *Calendar API*.
 
 ## Scraper
 
-Ce widget n'utilise pas de scraper.
+Ce module n'utilise pas de scraper.
 
 ## Exemple
 
@@ -50,7 +50,7 @@ mettant à jour une fois par jour).
 ```JSON
 {
     "googlecalendar": {
-        "widget": "community/regseb/googlecalendar",
+        "module": "community/regseb/googlecalendar",
         "coord": { "x": 1, "y": 1, "w": 28, "h": 5 },
         "files": {
             "config.json": {

@@ -1,9 +1,9 @@
-(function () {
-    "use strict";
-
-    const owner = (document["_currentScript"] || document.currentScript)
-                                                                 .ownerDocument;
-
+fetch("module/community/regseb/gmail/index.html").then(function (response) {
+    return response.text();
+}).then(function (data) {
+    return new DOMParser().parseFromString(data, "text/html")
+                          .querySelector("template");
+}).then(function (template) {
     const $    = require("jquery");
     const Cron = require("scronpt");
 
@@ -11,34 +11,11 @@
     const TOKEN_API_URL = "https://www.googleapis.com/oauth2/v4/";
     const GMAIL_API_URL = "https://www.googleapis.com/gmail/v1/";
 
-    document.registerElement("community-regseb-gmail",
-                             class extends HTMLElement {
+    customElements.define("community-regseb-gmail", class extends HTMLElement {
 
-        setFiles({ "config.json": config, "icon.svg": icon }) {
-            this.cron = new Cron(config.cron, false, this.update.bind(this));
-            this.index = config.index || 0;
-            this.query = encodeURIComponent(config.query || "is:unread");
-            this.key = config.key;
-            this.secret = config.secret;
-
-            this.style.backgroundColor = config.color || "#f44336";
-            if (undefined !== icon) {
-                this.style.backgroundImage = "url(\"data:image/svg+xml;" +
-                                             "base64," + btoa(icon) + "\")";
-            }
-            $("p a", this).attr("href", "https://mail.google.com/mail/u/" +
-                                        (config.index || 0));
-
-            $("dialog input[type=\"url\"]", this).val(
-                                             browser.identity.getRedirectURL());
-
-            // Ajouter des écouteurs sur les boutons de connexion et
-            // d'information.
-            $("p button:first", this).click(this.open.bind(this));
-            $("p button:last", this).click(this.info.bind(this));
-
-            $("dialog input[type=\"button\"]", this).click(
-                                                          this.copy.bind(this));
+        set files({ "config.json": config, "icon.svg": icon }) {
+            this._config = config;
+            this._icon = icon;
         }
 
         extract(size, token, query, index) {
@@ -181,14 +158,36 @@
             }
         }
 
-        createdCallback() {
-            const template = owner.querySelector("template").content;
-            const clone = owner.importNode(template, true);
-            this.appendChild(clone);
-        }
-
-        attachedCallback() {
+        connectedCallback() {
+            this.appendChild(template.content.cloneNode(true));
             this.size = parseInt(this.style.height, 10) / 14 - 1;
+
+            this.cron = new Cron(this._config.cron, false,
+                                 this.update.bind(this));
+            this.index = this._config.index || 0;
+            this.query = encodeURIComponent(this._config.query || "is:unread");
+            this.key = this._config.key;
+            this.secret = this._config.secret;
+
+            this.style.backgroundColor = this._config.color || "#f44336";
+            if (undefined !== this._icon) {
+                this.style.backgroundImage = "url(\"data:image/svg+xml;" +
+                                             "base64," + btoa(this._icon) +
+                                             "\")";
+            }
+            $("p a", this).attr("href", "https://mail.google.com/mail/u/" +
+                                        (this._config.index || 0));
+
+            $("dialog input[type=\"url\"]", this).val(
+                                             browser.identity.getRedirectURL());
+
+            // Ajouter des écouteurs sur les boutons de connexion et
+            // d'information.
+            $("p button:first", this).click(this.open.bind(this));
+            $("p button:last", this).click(this.info.bind(this));
+
+            $("dialog input[type=\"button\"]", this).click(
+                                                          this.copy.bind(this));
         }
     });
-})();
+});

@@ -1,13 +1,13 @@
 # community/regseb/openweathermap
 
-Ce widget affiche la météo d'une ville. Les prévisions sont récupérées du
+Ce module affiche la météo d'une ville. Les prévisions sont récupérées du
 service [OpenWeatherMap](https://openweathermap.org/).
 
 ## Configuration
 
-Le répertoire de la passerelle doit avoir un fichier ***config.json***
-contenant un objet
-[JSON](http://www.json.org/json-fr.html "JavaScript Object Notation") avec les
+Le répertoire du widget doit avoir un fichier ***config.json*** contenant un
+objet
+[JSON](https://www.json.org/json-fr.html "JavaScript Object Notation") avec les
 propriétés suivantes :
 
 - `"city"` : le nom de ville, suivit éventuellement du code du pays (séparé par
@@ -29,7 +29,7 @@ sur le site Internet du service :
 
 ## Scraper
 
-Ce widget n'utilise pas de scraper.
+Ce module n'utilise pas de scraper.
 
 ## Exemple
 
@@ -38,7 +38,7 @@ Cet exemple affiche la météo d'*Aix-en-Provence* sur fond bleu.
 ```JSON
 {
     "openweathermap/aix": {
-        "widget": "community/regseb/openweathermap",
+        "module": "community/regseb/openweathermap",
         "coord": { "x": 1, "y": 1, "w": 14, "h": 13 },
         "files": {
             "config.json": {

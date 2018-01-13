@@ -1,14 +1,14 @@
 # community/regseb/betaseries
 
-Ce widget affiche les prochains épisodes de séries à récupérer et/ou voir. La
+Ce module affiche les prochains épisodes de séries à récupérer et/ou voir. La
 liste est récupérée de votre compte du site
 **[BetaSeries](https://www.betaseries.com/)**.
 
 ## Configuration
 
-Le répertoire de la passerelle doit avoir un fichier ***config.json***
-contenant un objet
-[JSON](http://www.json.org/json-fr.html "JavaScript Object Notation") avec les
+Le répertoire du widget doit avoir un fichier ***config.json*** contenant un
+objet
+[JSON](https://www.json.org/json-fr.html "JavaScript Object Notation") avec les
 propriétés suivantes :
 
 - `"shows"` (optionnel - valeur par défaut : toutes vos séries) : la liste des
@@ -25,7 +25,7 @@ propriétés suivantes :
   indiquant la fréquence de mise à jour.
 
 Une image ayant pour nom ***icon.svg*** doit aussi est présente dans le
-répertoire de la passerelle.
+répertoire du widget.
 
 **20** est une taille raisonnable pour la largeur du cadre. La hauteur dépend
 du nombre d'épisodes qu'il faut afficher dans le cadre. Si vous souhaitez avoir
@@ -33,7 +33,7 @@ les *N* prochains épisodes : il faut fixer la hauteur à *N + 1*.
 
 ## Scraper
 
-Ce widget n'utilise pas de scraper.
+Ce module n'utilise pas de scraper.
 
 ## Exemple
 
@@ -44,7 +44,7 @@ minuit).
 ```JSON
 {
     "betaseries/itcrowd": {
-        "widget": "community/regseb/betaseries",
+        "module": "community/regseb/betaseries",
         "coord": { "x": 1, "y": 1, "w": 20, "h": 5 },
         "files": {
             "config.json": {

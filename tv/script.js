@@ -1,26 +1,22 @@
-(function () {
-    "use strict";
-
-    const owner = (document["_currentScript"] || document.currentScript)
-                                                                 .ownerDocument;
-
+fetch("module/community/regseb/tv/index.html").then(function (response) {
+    return response.text();
+}).then(function (data) {
+    return new DOMParser().parseFromString(data, "text/html")
+                          .querySelector("template");
+}).then(function (template) {
     const $    = require("jquery");
     const Cron = require("scronpt");
 
-    const IMG_DIR = "widget/community/regseb/tv/img/";
+    const IMG_DIR = "module/community/regseb/tv/img/";
 
-    document.registerElement("community-regseb-tv", class extends HTMLElement {
+    customElements.define("community-regseb-tv", class extends HTMLElement {
 
-        setFiles({ "config.json": config }) {
-            // Mettre à jour les données tous les jours à 1h.
-            this.cron = new Cron(config.cron || "0 1 * * *",
-                                 this.update.bind(this));
-
-            this.style.backgroundColor = config.color || "#9e9e9e";
+        set files({ "config.json": config }) {
+            this._config = config;
         }
 
-        setScrapers(scrapers) {
-            this.scraper = scrapers[0];
+        set scrapers(scrapers) {
+            this._scraper = scrapers[0];
         }
 
         display(data) {
@@ -64,7 +60,7 @@
             this.cron.start();
 
             const that = this;
-            this.scraper.extract().then(function (items) {
+            this._scraper.extract().then(function (items) {
                 $("ul", that).empty();
                 items.forEach(that.display.bind(that));
             });
@@ -76,15 +72,17 @@
             }
         }
 
-        createdCallback() {
-            const template = owner.querySelector("template").content;
-            const clone = owner.importNode(template, true);
-            this.appendChild(clone);
-        }
+        connectedCallback() {
+            this.appendChild(template.content.cloneNode(true));
 
-        attachedCallback() {
+            // Mettre à jour les données tous les jours à 1h.
+            this.cron = new Cron(this._config.cron || "0 1 * * *",
+                                 this.update.bind(this));
+
+            this.style.backgroundColor = this._config.color || "#9e9e9e";
+
             document.addEventListener("visibilitychange", this.wake.bind(this));
             this.update();
         }
     });
-})();
+});

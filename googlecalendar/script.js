@@ -1,9 +1,10 @@
-(function () {
-    "use strict";
-
-    const owner = (document["_currentScript"] || document.currentScript)
-                                                                 .ownerDocument;
-
+fetch("module/community/regseb/googlecalendar/index.html").then(
+                                                           function (response) {
+    return response.text();
+}).then(function (data) {
+    return new DOMParser().parseFromString(data, "text/html")
+                          .querySelector("template");
+}).then(function (template) {
     const $    = require("jquery");
     const Cron = require("scronpt");
 
@@ -28,35 +29,12 @@
         "minute": "2-digit"
     });
 
-    document.registerElement("community-regseb-googlecalendar",
-                             class extends HTMLElement {
+    customElements.define("community-regseb-googlecalendar",
+                          class extends HTMLElement {
 
-        setFiles({ "config.json": config, "icon.svg": icon }) {
-            this.cron      = new Cron(config.cron || "0 */4 * * *", false,
-                                      this.update.bind(this));
-            this.calendars = config.calendars || ["primary"];
-            this.index     = config.index || 0;
-            this.key       = config.key;
-            this.secret    = config.secret;
-
-            this.style.backgroundColor = config.color || "#3f51b5";
-            if (undefined !== icon) {
-                this.style.backgroundImage = "url(\"data:image/svg+xml;" +
-                                             "base64," + btoa(icon) + "\")";
-            }
-            $("p a", this).attr("href", "https://www.google.com/calendar/b/" +
-                                         (config.index || 0) + "/render");
-
-            $("dialog input[type=\"url\"]", this).val(
-                                             browser.identity.getRedirectURL());
-
-            // Ajouter des écouteurs sur les boutons de connexion et
-            // d'information.
-            $("p button:first", this).click(this.open.bind(this));
-            $("p button:last", this).click(this.info.bind(this));
-
-            $("dialog input[type=\"button\"]", this).click(
-                                                          this.copy.bind(this));
+        set files({ "config.json": config, "icon.svg": icon }) {
+            this._config = config;
+            this._icon = icon;
         }
 
         extract(calendars, size, token, index) {
@@ -252,14 +230,36 @@
             }
         }
 
-        createdCallback() {
-            const template = owner.querySelector("template").content;
-            const clone = owner.importNode(template, true);
-            this.appendChild(clone);
-        }
-
-        attachedCallback() {
+        connectedCallback() {
+            this.appendChild(template.content.cloneNode(true));
             this.size = parseInt(this.style.height, 10) / 14 - 1;
+
+            this.cron      = new Cron(this._config.cron || "0 */4 * * *", false,
+                                      this.update.bind(this));
+            this.calendars = this._config.calendars || ["primary"];
+            this.index     = this._config.index || 0;
+            this.key       = this._config.key;
+            this.secret    = this._config.secret;
+
+            this.style.backgroundColor = this._config.color || "#3f51b5";
+            if (undefined !== this._icon) {
+                this.style.backgroundImage = "url(\"data:image/svg+xml;" +
+                                             "base64," + btoa(this._icon) +
+                                             "\")";
+            }
+            $("p a", this).attr("href", "https://www.google.com/calendar/b/" +
+                                         (this._config.index || 0) + "/render");
+
+            $("dialog input[type=\"url\"]", this).val(
+                                             browser.identity.getRedirectURL());
+
+            // Ajouter des écouteurs sur les boutons de connexion et
+            // d'information.
+            $("p button:first", this).click(this.open.bind(this));
+            $("p button:last", this).click(this.info.bind(this));
+
+            $("dialog input[type=\"button\"]", this).click(
+                                                          this.copy.bind(this));
         }
     });
-})();
+});
