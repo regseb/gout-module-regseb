@@ -26,6 +26,7 @@ fetch("module/community/regseb/om/index.html").then(function (response) {
         "canalplussport":         "Canal+ Sport",
         "canalplus_bein1":        "Canal+ / Bein Sports 1",
         "canalplussport_bein1":   "Canal+ Sport / Bein Sports 1",
+        "eurosport1":             "Eurosport 1",
         "eurosport2":             "Eurosport 2",
         "footplus":               "Foot+",
         "france2":                "France 2",
@@ -81,6 +82,7 @@ fetch("module/community/regseb/om/index.html").then(function (response) {
             case "canalplus-logo-ok-min":       return "canalplus";
             case "canal-beinsport1-min":        return "canalplus_bein1";
             case "canal-plus-sport-beinsport1": return "canalplussport_bein1";
+            case "eurosport_1":                 return "eurosport1";
             case "eurosport_2":                 return "eurosport2";
             case "france2-logo-ok-min":         return "france2";
             case "france3_canalplussport":      return "france3_canalplussport";
