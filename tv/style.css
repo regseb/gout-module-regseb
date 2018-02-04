@@ -15,6 +15,7 @@ community-regseb-tv li {
 }
 community-regseb-tv li > img,
 community-regseb-tv span {
+    height: 1em;
     margin-right: 0.3em;
 }
 community-regseb-tv li > img:first-child {
