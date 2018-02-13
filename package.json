@@ -1,0 +1,32 @@
+{
+    "name": "gout-module-regseb",
+    "version": "0.1.0",
+    "description": "Modules pour Gout.",
+    "keyword": [
+        "gout",
+        "module",
+        "aggregator",
+        "javascript"
+    ],
+    "homepage": "https://github.com/regseb/gout-module-regseb",
+    "bugs": {
+        "url": "https://github.com/regseb/gout-module-regseb/issues"
+    },
+    "license": "EUPL-1.2",
+    "author": "Sébastien Règne <regseb@gmail.com> (https://github.com/regseb)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/regseb/gout-module-regseb.git"
+    },
+    "scripts": {
+        "lint": "metalint"
+    },
+    "devDependencies": {
+        "eslint": "^4.17.0",
+        "htmlhint": "^0.9.13",
+        "jsonlint": "^1.6.2",
+        "markdownlint": "^0.7.0",
+        "metalint": "^0.7.1",
+        "stylelint": "^8.4.0"
+    }
+}
