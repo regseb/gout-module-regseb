@@ -33,6 +33,7 @@ fetch("module/community/regseb/om/index.html").then(function (response) {
         "france3":                "France 3",
         "france3_canalplussport": "France 3 / Canal+ Sport",
         "france4":                "France 4",
+        "m6":                     "M6",
         "omnet":                  "OM.net",
         "undisclosed":            "Non communiquée",
         "unknown":                "Inconnue",
@@ -90,6 +91,7 @@ fetch("module/community/regseb/om/index.html").then(function (response) {
             case "france4-logo-ok-min":         return "france4";
             case "logo-omnet":                  return "omnet";
             case "logo-w9-min":                 return "w9";
+            case "m6-min":                      return "m6";
             case "w9-beinsport1-min":           return "w9_bein1";
             default:                            return "unknown";
         }
