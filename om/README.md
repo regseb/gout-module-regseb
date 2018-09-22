@@ -17,8 +17,6 @@ propriétés suivantes :
 - `"cron`" (optionnel - valeur par défaut : `"0 7 * * *"`) : la notation cron
   indiquant la fréquence de mise à jour.
 
-Les dimensions conseillées sont **20x3**.
-
 ## Scraper
 
 Ce module n'utilise pas de scraper.
@@ -30,10 +28,7 @@ sept heures.
 
 ```JSON
 {
-    "om": {
-        "module": "community/regseb/om",
-        "coord": { "x": 1, "y": 1, "w": 20, "h": 3 },
-        "files": { "config.json": {} }
-    }
+    "module": "community/regseb/om",
+    "files": { "config.json": {} }
 }
 ```

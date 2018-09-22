@@ -1,10 +1,14 @@
-community-regseb-tv ul {
+community-regseb-tv {
     color: white;
+    display: block;
     font-family: Verdana, sans-serif;
     font-size: 10px;
     line-height: 1.4em;
+    padding: 0.7em;
+}
+community-regseb-tv ul {
     list-style-type: none;
-    margin: 0.7em;
+    margin: 0;
     padding-left: 0;
 }
 community-regseb-tv li {

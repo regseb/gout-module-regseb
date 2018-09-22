@@ -11,13 +11,13 @@ fetch("module/community/regseb/googlecalendar/index.html").then(
     const OAUTH_API_URL = "https://accounts.google.com/o/oauth2/v2/";
     const TOKEN_API_URL = "https://www.googleapis.com/oauth2/v4/";
     const CALENDAR_API_URL = "https://www.googleapis.com/calendar/v3/";
-    // dd/MM/yyyy.
+    // Définir le format court : dd/MM/yyyy.
     const DF_SHORT = new Intl.DateTimeFormat("fr-FR", {
         "day":   "2-digit",
         "month": "2-digit",
         "year":  "numeric"
     });
-    // EEEEE dd MMMMM yyyy.
+    // Définir le format long : EEEEE dd MMMMM yyyy.
     const DF_LONG = new Intl.DateTimeFormat("fr-FR", {
         "weekday": "long",
         "day":     "2-digit",
@@ -125,17 +125,18 @@ fetch("module/community/regseb/googlecalendar/index.html").then(
         }
 
         update() {
-            // Si la page est cachée : ne pas actualiser les données et indiquer
-            // qu'il faudra mettre à jour les données quand l'utilisateur
-            // reviendra sur la page.
-            if (document.hidden) {
+            // Si la page est cachée ou si l'utilisateur n'est pas encore
+            // connecté : ne pas actualiser les données et indiquer qu'il faudra
+            // mettre à jour les données quand l'utilisateur reviendra sur la
+            // page.
+            if (document.hidden || null === this.token) {
                 this.cron.stop();
                 return;
             }
             this.cron.start();
 
             const that = this;
-            this.extract(this.calendars, this.size, this.token.access,
+            this.extract(this.calendars, this.max, this.token.access,
                          this.index).then(function (items) {
                 if (0 === items.length) {
                     $("ul", that).hide();
@@ -232,14 +233,14 @@ fetch("module/community/regseb/googlecalendar/index.html").then(
 
         connectedCallback() {
             this.appendChild(template.content.cloneNode(true));
-            this.size = parseInt(this.style.height, 10) / 14 - 1;
-
-            this.cron      = new Cron(this._config.cron || "0 */4 * * *", false,
+            this.cron      = new Cron(this._config.cron || "0 */4 * * *",
                                       this.update.bind(this));
-            this.calendars = this._config.calendars || ["primary"];
+            this.max       = this._config.max || 2147483647;
             this.index     = this._config.index || 0;
+            this.calendars = this._config.calendars || ["primary"];
             this.key       = this._config.key;
             this.secret    = this._config.secret;
+            this.token     = null;
 
             this.style.backgroundColor = this._config.color || "#3f51b5";
             if (undefined !== this._icon) {

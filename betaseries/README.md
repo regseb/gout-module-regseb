@@ -21,15 +21,16 @@ propriétés suivantes :
 - `"key"` : votre [clé pour l'API](https://www.betaseries.com/api/) de
   BetaSeries ;
 - `"secret"` : votre clé secrète pour l'API de BetaSeries ;
-- `"cron"` (optionnel - valeur par défaut : `"0 0 * * *"`) : la notation cron
-  indiquant la fréquence de mise à jour.
+- `"cron"` (optionnel - valeur par défaut : `"@daily"`) : la notation cron
+  indiquant la fréquence de mise à jour ;
+- `"max"` (optionnel - aucune limite par défaut) : le nombre maximal d'épisodes
+  affichés dans le widget.
 
-Une image ayant pour nom ***icon.svg*** doit aussi est présente dans le
-répertoire du widget.
-
-**20** est une taille raisonnable pour la largeur du cadre. La hauteur dépend
-du nombre d'épisodes qu'il faut afficher dans le cadre. Si vous souhaitez avoir
-les *N* prochains épisodes : il faut fixer la hauteur à *N + 1*.
+Une image ayant pour nom ***icon.svg*** peut aussi est présente dans le
+répertoire du widget. Par défaut, le logo de BetaSeries sera utilisé. L'image
+doit être carrée et le dessin doit occupé toute la zone de l'image. Si le dessin
+n'est pas carré, il faut le centrer verticalement et l'aligner à droite. Seule
+la couleur noire doit être utilisée et elle doit avoir une opacité de `0.2`.
 
 ## Scraper
 
@@ -43,17 +44,14 @@ minuit).
 
 ```JSON
 {
-    "betaseries/itcrowd": {
-        "module": "community/regseb/betaseries",
-        "coord": { "x": 1, "y": 1, "w": 20, "h": 5 },
-        "files": {
-            "config.json": {
-                "shows": ["The IT Crowd"],
-                "format": "s{season}e{episode} : {title}",
-                "key": "d527c40702a3 (une clé de ce style)",
-                "secret": "6d587671250475442502c66593526 (une clé de ce style)",
-                "cron": "0 0 * * *"
-            }
+    "module": "community/regseb/betaseries",
+    "files": {
+        "config.json": {
+            "shows": ["The IT Crowd"],
+            "format": "s{season}e{episode} : {title}",
+            "key": "d527c40702a3 (une clé de ce style)",
+            "secret": "6d587671250475442502c66593526 (une clé de ce style)",
+            "max": 3
         }
     }
 }

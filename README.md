@@ -18,4 +18,4 @@ git submodule add -f https://github.com/regseb/gout-module-regseb.git src/module
 ## Licence
 
 Les modules sont publiés sous la [licence publique de l’Union européenne - EUPL
-v1.2](https://joinup.ec.europa.eu/page/eupl-text-11-12).
+v1.2](https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12).

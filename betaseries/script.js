@@ -185,7 +185,7 @@ fetch("module/community/regseb/betaseries/index.html").then(
             this.appendChild(template.content.cloneNode(true));
             this.size = parseInt(this.style.height, 10) / 14 - 1;
 
-            this.cron = new Cron(this._config.cron || "0 0 * * *", false,
+            this.cron = new Cron(this._config.cron || "@daily", false,
                                  this.update.bind(this));
             this.shows = this._config.shows || null;
             this.format = this._config.format ||

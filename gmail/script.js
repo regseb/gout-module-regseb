@@ -54,17 +54,18 @@ fetch("module/community/regseb/gmail/index.html").then(function (response) {
         }
 
         update() {
-            // Si la page est cachée : ne pas actualiser les données et indiquer
-            // qu'il faudra mettre à jour les données quand l'utilisateur
-            // reviendra sur la page.
-            if (document.hidden) {
+            // Si la page est cachée ou si l'utilisateur n'est pas encore
+            // connecté : ne pas actualiser les données et indiquer qu'il faudra
+            // mettre à jour les données quand l'utilisateur reviendra sur la
+            // page.
+            if (document.hidden || null === this.token) {
                 this.cron.stop();
                 return;
             }
             this.cron.start();
 
             const that = this;
-            this.extract(this.size, this.token.access, this.query,
+            this.extract(this.max, this.token.access, this.query,
                          this.index).then(function (items) {
                 if (0 === items.length) {
                     $("ul", that).hide();
@@ -91,6 +92,8 @@ fetch("module/community/regseb/gmail/index.html").then(function (response) {
             const that = this;
             $.post(url, params).then(function (data) {
                 that.token.access = data["access_token"];
+                // Préparer la prochaine requête (une minute avant l'expiration)
+                // pour récupérer un nouveau jeton.
                 setTimeout(that.refresh.bind(that),
                            (data["expires_in"] - 60) * 1000);
             });
@@ -160,14 +163,13 @@ fetch("module/community/regseb/gmail/index.html").then(function (response) {
 
         connectedCallback() {
             this.appendChild(template.content.cloneNode(true));
-            this.size = parseInt(this.style.height, 10) / 14 - 1;
-
-            this.cron = new Cron(this._config.cron, false,
-                                 this.update.bind(this));
-            this.index = this._config.index || 0;
-            this.query = encodeURIComponent(this._config.query || "is:unread");
-            this.key = this._config.key;
+            this.cron   = new Cron(this._config.cron, this.update.bind(this));
+            this.max    = this._config.max || 2147483647;
+            this.index  = this._config.index || 0;
+            this.query  = encodeURIComponent(this._config.query || "is:unread");
+            this.key    = this._config.key;
             this.secret = this._config.secret;
+            this.token  = null;
 
             this.style.backgroundColor = this._config.color || "#f44336";
             if (undefined !== this._icon) {

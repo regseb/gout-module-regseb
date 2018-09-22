@@ -20,12 +20,15 @@ propriétés suivantes :
 - `"cron"` (optionnel - valeur par défaut : `"0 */4 * * *"`) : la notation cron
   indiquant la fréquence de mise à jour des évènements ;
 - `"key"` : un identifiant client pour les API Google ;
-- `"secret"` : le code secret associé à l'identifiant.
+- `"secret"` : le code secret associé à l'identifiant ;
+- `"max"` (optionnel - aucune limite par défaut) : le nombre maximal de
+  courriels affichés dans le widget.
 
-**28** est une taille raisonnable pour la largeur du cadre. La hauteur dépend
-du nombre d'évènements qui peuvent être affichés dans le cadre. Si vous
-souhaitez avoir les *N* prochains évènements : il faut fixer la hauteur à
-*N + 1*.
+Une image ayant pour nom ***icon.svg*** peut aussi est présente dans le
+répertoire du widget. Par défaut, le logo de Google Agenda sera utilisé. L'image
+doit être carrée et le dessin doit occupé toute la zone de l'image. Si le dessin
+n'est pas carré, il faut le centrer verticalement et l'aligner à droite. Seule
+la couleur noire doit être utilisée et elle doit avoir une opacité de `0.2`.
 
 ### `"key"` et `"secret"`
 
@@ -49,15 +52,13 @@ mettant à jour une fois par jour).
 
 ```JSON
 {
-    "googlecalendar": {
-        "module": "community/regseb/googlecalendar",
-        "coord": { "x": 1, "y": 1, "w": 28, "h": 5 },
-        "files": {
-            "config.json": {
-                "key": "88198.apps.googleusercontent.com (une clé de ce style)",
-                "secret": "sdlkfjaskd (un code de ce style)",
-                "cron": "0 5 * * *"
-            }
+    "module": "community/regseb/googlecalendar",
+    "files": {
+        "config.json": {
+            "key": "88198.apps.googleusercontent.com (une clé de ce style)",
+            "secret": "sdlkfjaskd (un code de ce style)",
+            "cron": "0 5 * * *",
+            "max": 5
         }
     }
 }

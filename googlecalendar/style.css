@@ -3,9 +3,11 @@ community-regseb-googlecalendar {
     background-position: right 0.7em center;
     background-repeat: no-repeat;
     background-size: auto calc(100% - 1.4em);
+    display: block;
     font-family: Verdana, sans-serif;
     font-size: 10px;
     line-height: 1.4em;
+    padding: 0.7em;
 }
 community-regseb-googlecalendar a {
     color: white;
@@ -18,7 +20,7 @@ community-regseb-googlecalendar a:hover {
     text-decoration: underline;
 }
 community-regseb-googlecalendar p {
-    margin: 0.7em;
+    margin: 0;
 }
 community-regseb-googlecalendar button,
 community-regseb-googlecalendar input[type="button"],
@@ -57,7 +59,7 @@ community-regseb-googlecalendar p a {
 community-regseb-googlecalendar ul {
     color: white;
     list-style-type: none;
-    margin: 0.7em;
+    margin: 0;
     padding-left: 0;
 }
 community-regseb-googlecalendar li {

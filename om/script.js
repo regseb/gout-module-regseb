@@ -40,14 +40,14 @@ fetch("module/community/regseb/om/index.html").then(function (response) {
         "w9":                     "W9",
         "w9_bein1":               "W9 / Bein Sports 1"
     };
-    // dd/MM HH:mm.
+    // Définir le format court : dd/MM HH:mm.
     const DTF_SHORT = new Intl.DateTimeFormat("fr-FR", {
         "day":    "2-digit",
         "month":  "2-digit",
         "hour":   "2-digit",
         "minute": "2-digit"
     });
-    // EEEEE dd MMMMM yyyy HH:mm.
+    // Définir le format long : EEEEE dd MMMMM yyyy HH:mm.
     const DTF_LONG = new Intl.DateTimeFormat("fr-FR", {
         "weekday": "long",
         "day":     "2-digit",
@@ -75,7 +75,7 @@ fetch("module/community/regseb/om/index.html").then(function (response) {
         if (0 === $img.length) {
             return "undisclosed";
         }
-        switch (/\/([^/]+)\.png$/.exec($img.attr("data-src"))[1]) {
+        switch ((/\/([^/]+)\.png$/u).exec($img.attr("data-src"))[1]) {
             case "150717_foot_plus":            return "footplus";
             case "150727_cplusport":            return "canalplussport";
             case "150916_bein2_ok_0":           return "bein2";

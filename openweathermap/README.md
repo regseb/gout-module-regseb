@@ -15,11 +15,9 @@ propriétés suivantes :
 - `"color"` (optionnel - valeur par défaut : `"#03a9f4"`) : la couleur de fond
   du cadre (au format hexadécimale, régulier RGB ou avec des mots-clefs
   prédéfinis) ;
-- `"cron"` (optionnel - valeur par défaut : `"0 * * * *"`) : la notation cron
+- `"cron"` (optionnel - valeur par défaut : `"@hourly"`) : la notation cron
   indiquant la fréquence de mise à jour ;
 - `"appid"` : le clé de l'API pour le service d'OpenWeatherMap.
-
-Les dimensions conseillées sont **14x13**.
 
 ### `"appid"`
 
@@ -37,14 +35,11 @@ Cet exemple affiche la météo d'*Aix-en-Provence* sur fond bleu.
 
 ```JSON
 {
-    "openweathermap/aix": {
-        "module": "community/regseb/openweathermap",
-        "coord": { "x": 1, "y": 1, "w": 14, "h": 13 },
-        "files": {
-            "config.json": {
-                "appid": "1a23edc4f5b67... (une clé de ce style)",
-                "city": "Aix-en-Provence,fr"
-            }
+    "module": "community/regseb/openweathermap",
+    "files": {
+        "config.json": {
+            "appid": "1a23edc4f5b67... (une clé de ce style)",
+            "city": "Aix-en-Provence,fr"
         }
     }
 }

@@ -149,7 +149,7 @@ fetch("module/community/regseb/openweathermap/index.html").then(
         connectedCallback() {
             this.appendChild(template.content.cloneNode(true));
 
-            this.cron = new Cron(this._config.cron || "0 * * * *",
+            this.cron = new Cron(this._config.cron || "@hourly",
                                  this.update.bind(this));
             this.city = this._config.city;
             this.appid = this._config.appid;
