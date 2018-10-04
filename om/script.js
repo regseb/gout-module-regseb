@@ -35,6 +35,7 @@ fetch("module/community/regseb/om/index.html").then(function (response) {
         "france4":                "France 4",
         "m6":                     "M6",
         "omnet":                  "OM.net",
+        "rmcsport":               "RMC Sport",
         "undisclosed":            "Non communiquée",
         "unknown":                "Inconnue",
         "w9":                     "W9",
@@ -75,7 +76,8 @@ fetch("module/community/regseb/om/index.html").then(function (response) {
         if (0 === $img.length) {
             return "undisclosed";
         }
-        switch ((/\/([^/]+)\.png$/u).exec($img.attr("data-src"))[1]) {
+        switch ((/\/([^/]+)\.(png|jpg)$/u).exec($img.attr("data-src"))[1]) {
+            case "180904_rmcsport":             return "rmcsport";
             case "150717_foot_plus":            return "footplus";
             case "150727_cplusport":            return "canalplussport";
             case "150916_bein2_ok_0":           return "bein2";
